@@ -50,10 +50,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    //Room
+    // Room
     kapt(libs.room.compiler)
     implementation(libs.room.runtime)
     implementation(libs.room.paging)
     implementation(libs.room.ktx)
 
+    // Fragment
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
 }
