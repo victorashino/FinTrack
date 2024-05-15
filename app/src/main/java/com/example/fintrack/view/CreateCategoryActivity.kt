@@ -29,12 +29,14 @@ class CreateCategoryActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            if (binding.edtCategoryName.text.toString().isEmpty()) {
-                Snackbar.make(binding.root, "Please enter a category name", Snackbar.LENGTH_SHORT)
-                    .show()
+            if (binding.edtCategoryName.text.toString().isNotEmpty()) {
+                startActivity(
+                    ColorCategoryActivity
+                        .startColorCategoryActivity(this, binding.edtCategoryName.text.toString())
+                )
             } else {
-                val intent = Intent(this, ColorCategoryActivity::class.java)
-                startActivity(intent)
+                Snackbar.make(binding.root, "Please enter a category name", Snackbar.LENGTH_SHORT)
+                .show()
             }
         }
 
