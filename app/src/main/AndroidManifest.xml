@@ -17,7 +17,7 @@
             android:exported="false" />
         <activity
             android:name=".view.CreateCategoryActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

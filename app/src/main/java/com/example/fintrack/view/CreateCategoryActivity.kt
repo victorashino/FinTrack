@@ -2,13 +2,16 @@ package com.example.fintrack.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.fintrack.R
 import com.example.fintrack.databinding.ActivityCreateCategoryBinding
+import com.google.android.material.snackbar.Snackbar
 
 class CreateCategoryActivity : AppCompatActivity() {
 
@@ -25,17 +28,18 @@ class CreateCategoryActivity : AppCompatActivity() {
             insets
         }
 
-        if (savedInstanceState == null) {
-            val nameCategoryFragment = NameCategoryFragment.newInstance()
-
-            supportFragmentManager.commit {
-                replace(R.id.fragment_container_view, nameCategoryFragment)
-                setReorderingAllowed(true)
+        binding.btnNext.setOnClickListener {
+            if (binding.edtCategoryName.text.toString().isEmpty()) {
+                Snackbar.make(binding.root, "Please enter a category name", Snackbar.LENGTH_SHORT)
+                    .show()
+            } else {
+                val intent = Intent(this, ColorCategoryActivity::class.java)
+                startActivity(intent)
             }
-            binding.icBack.setOnClickListener {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-        } // TODO(Ashino) // fragment cor/icone muda a acao do botao voltar
+        }
 
+        binding.icBack.setOnClickListener {
+            finish()
+        }
     }
 }

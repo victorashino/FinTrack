@@ -1,6 +1,5 @@
 package com.example.fintrack.model
 
-import com.example.fintrack.model.Category
 import java.io.Serializable
 
 data class Spent (
