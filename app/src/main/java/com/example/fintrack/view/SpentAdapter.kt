@@ -43,12 +43,10 @@ class SpentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(spent: Spent) = with(itemView) {
 
         val name = findViewById<TextView>(R.id.txtSpentName)
-        val color = findViewById<View>(R.id.spentColor)
         val icone = findViewById<ImageView>(R.id.imgIcon)
         val value = findViewById<TextView>(R.id.txtSpentValue)
 
         name.text = spent.name
-        color.setBackgroundColor(spent.category.color)
         icone.setImageResource(spent.category.icon)
         value.text = spent.value.toString()
     }

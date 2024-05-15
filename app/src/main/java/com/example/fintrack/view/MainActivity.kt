@@ -1,3 +1,4 @@
+
 package com.example.fintrack.view
 
 import android.content.Intent
@@ -30,24 +31,25 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val spentList = arrayListOf(
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
-        Spent(0, "Wi-fi", 127.19f, Category(0, "Food", R.color.green, R.drawable.ic_wifi)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
     )
 
     private lateinit var binding: ActivityMainBinding
 
     private val categoryAdapter: CategoryAdapter by lazy { CategoryAdapter() }
+
     private val spentAdapter: SpentAdapter by lazy { SpentAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -58,4 +58,5 @@ dependencies {
 
     // Fragment
     implementation("androidx.fragment:fragment-ktx:1.7.1")
+
 }
