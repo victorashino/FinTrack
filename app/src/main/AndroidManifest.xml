@@ -13,12 +13,6 @@
         android:theme="@style/Theme.FinTrack"
         tools:targetApi="31">
         <activity
-            android:name=".view.IconCategoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.ColorCategoryActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.CreateCategoryActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity

@@ -1,4 +1,4 @@
-package com.example.fintrack.view
+package com.example.fintrack.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View

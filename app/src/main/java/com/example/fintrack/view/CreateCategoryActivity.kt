@@ -28,18 +28,6 @@ class CreateCategoryActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnNext.setOnClickListener {
-            if (binding.edtCategoryName.text.toString().isNotEmpty()) {
-                startActivity(
-                    ColorCategoryActivity
-                        .startColorCategoryActivity(this, binding.edtCategoryName.text.toString())
-                )
-            } else {
-                Snackbar.make(binding.root, "Please enter a category name", Snackbar.LENGTH_SHORT)
-                .show()
-            }
-        }
-
         binding.icBack.setOnClickListener {
             finish()
         }
