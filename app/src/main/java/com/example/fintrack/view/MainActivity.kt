@@ -7,9 +7,11 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fintrack.R
 import com.example.fintrack.databinding.ActivityMainBinding
+import com.example.fintrack.databinding.AddCategoryItemBinding
 import com.example.fintrack.model.Category
 import com.example.fintrack.model.Spent
 import com.example.fintrack.view.adapter.CategoryAdapter
@@ -84,11 +86,15 @@ class MainActivity : AppCompatActivity() {
 
         val rvSpent = binding.rvSpent
         rvSpent.adapter = spentAdapter
-        spentAdapter.addHeaderAndSubmitList(spentList)
+        spentAdapter.submitList(spentList)
 
         val rvCategory = findViewById<RecyclerView>(R.id.rvCategory)
         rvCategory.adapter = categoryAdapter
         categoryAdapter.submitList(categoryList)
+
+        binding.btnNewCategory.setOnClickListener {
+            startActivity(Intent(this, CreateCategoryActivity::class.java))
+        }
 
     }
 }
