@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_marginHorizontal="16dp"
     android:layout_height="78dp"
+    android:id="@+id/ctn_spent_card"
     android:layout_marginBottom="12dp"
     android:background="@drawable/category_item_shape"
     android:elevation="0dp">
@@ -13,10 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginStart="28dp"
         android:src="@drawable/ic_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtSpentName"

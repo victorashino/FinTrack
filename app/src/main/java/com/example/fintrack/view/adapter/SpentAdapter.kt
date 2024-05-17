@@ -3,6 +3,7 @@ package com.example.fintrack.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -36,7 +37,6 @@ class SpentAdapter :
             return oldItem == newItem
         }
     }
-
 }
 
 class SpentViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -44,9 +44,13 @@ class SpentViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     fun bind(spent: Spent) = with(view) {
         val name = findViewById<TextView>(R.id.txtSpentName)
         val value = findViewById<TextView>(R.id.txtSpentValue)
+        val icon = findViewById<ImageView>(R.id.imgIcon)
+        // TODO(cor)
 
         name.text = spent.name
         value.text = spent.value.toString()
+        icon.setImageResource(spent.category.icon)
+        // TODO(cor)
     }
 }
 

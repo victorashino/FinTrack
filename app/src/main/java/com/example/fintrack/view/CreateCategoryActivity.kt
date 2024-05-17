@@ -28,7 +28,7 @@ class CreateCategoryActivity : AppCompatActivity() {
             insets
         }
 
-        binding.icBack.setOnClickListener {
+        binding.ctnBack.setOnClickListener {
             finish()
         }
     }

@@ -8,3 +8,5 @@ data class Spent (
     val value: Float,
     val category: Category
 ) : Serializable
+
+

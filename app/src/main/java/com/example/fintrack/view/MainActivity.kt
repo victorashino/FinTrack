@@ -3,6 +3,7 @@ package com.example.fintrack.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val spentList = arrayListOf(
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "Faculdade", 17.000f, Category(0, "Food", R.color.green, R.drawable.ic_game_control)),
         Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
         Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
         Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
