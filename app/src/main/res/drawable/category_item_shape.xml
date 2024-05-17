@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-    <item
-        android:height="78dp"
-        >
-        <shape android:shape="rectangle" >
+    <item android:height="78dp">
+        <shape android:shape="rectangle">
             <corners
-                android:bottomRightRadius="15dp"
                 android:bottomLeftRadius="15dp"
+                android:bottomRightRadius="15dp"
                 android:topLeftRadius="15dp"
                 android:topRightRadius="15dp" />
             <stroke
@@ -15,7 +14,22 @@
                 android:color="@color/pink" />
         </shape>
     </item>
-    <item android:drawable="@drawable/view_color"
-        android:width="64dp" />
+    <item android:width="64dp">
+        <shape
+
+            android:height="78dp"
+            android:shape="rectangle">
+            <corners
+                android:bottomLeftRadius="15dp"
+                android:topLeftRadius="15dp" />
+            <solid android:color="@color/pink" />
+        </shape>
+    </item>
+
+
+
+
+    <!--android:drawable="@drawable/view_color"
+android:width="64dp" />-->
 
 </layer-list>
