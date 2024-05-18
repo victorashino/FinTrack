@@ -5,19 +5,20 @@
     android:layout_width="wrap_content"
     android:paddingHorizontal="16dp"
     android:layout_marginEnd="16dp"
+    android:id="@+id/ctn_category_item"
     android:paddingVertical="4dp"
     android:background="@drawable/category_item_layout_border"
     android:layout_height="wrap_content">
-
 
     <TextView
         android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TextNormal"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
