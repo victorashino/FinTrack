@@ -1,10 +1,15 @@
 package com.example.fintrack.view.adapter
 
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.toColorInt
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +21,8 @@ class SpentAdapter :
     ListAdapter<Spent, SpentViewHolder>(SpentAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpentViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.spent_item, parent, false)
-        return SpentViewHolder(view)
+        val binding = SpentItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SpentViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SpentViewHolder, position: Int) {
@@ -39,18 +42,22 @@ class SpentAdapter :
     }
 }
 
-class SpentViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class SpentViewHolder(private val binding: SpentItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(spent: Spent) = with(view) {
-        val name = findViewById<TextView>(R.id.txtSpentName)
-        val value = findViewById<TextView>(R.id.txtSpentValue)
-        val icon = findViewById<ImageView>(R.id.imgIcon)
-        // TODO(cor)
+    fun bind(spent: Spent) {/*
+        val layerDrawable = binding.ctnSpentCard.background as LayerDrawable*/
+
+        val name = binding.txtSpentName
+        val value = binding.txtSpentValue
+        val icon = binding.imgIcon/*
+        val borderColor = layerDrawable.getDrawable(0) as GradientDrawable
+        val sideColor = layerDrawable.getDrawable(1) as GradientDrawable*/
 
         name.text = spent.name
-        value.text = spent.value.toString()
-        icon.setImageResource(spent.category.icon)
-        // TODO(cor)
+        value.text = "$${spent.value}"
+        icon.setImageResource(spent.category.icon)/*
+        borderColor.setStroke(1, spent.category.color)
+        sideColor.setColor(spent.category.color)*/
     }
 }
 

@@ -1,18 +1,13 @@
-
 package com.example.fintrack.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fintrack.R
 import com.example.fintrack.databinding.ActivityMainBinding
-import com.example.fintrack.databinding.AddCategoryItemBinding
 import com.example.fintrack.model.Category
 import com.example.fintrack.model.Spent
 import com.example.fintrack.view.adapter.CategoryAdapter
@@ -21,52 +16,50 @@ import com.example.fintrack.view.adapter.SpentAdapter
 class MainActivity : AppCompatActivity() {
 
     private val categoryList = arrayListOf(
-        Category(0, "All", 5, 5),
-        Category(0, "Mercado", 5, 5),
-        Category(0, "Escola", 5, 5),
-        Category(0, "Carro", 5, 5),
-        Category(0, "Food", 5, 5),
-        Category(0, "Food", 5, 5),
-        Category(0, "Compras", 5, 5),
-        Category(0, "Food", 5, 5),
-        Category(0, "Investimento", 5, 5),
-        Category(0, "Lazer", 5, 5),
-        Category(0, "Faculdade", 5, 5),
-        Category(0, "Food", 5, 5),
-        Category(0, "Veterinario", 5, 5),
-        Category(0, "Food", 5, 5),
+        Category(0, "All", R.color.light_green, R.drawable.ic_game_control),
+        Category(0, "Escola", R.color.medium_orange, R.drawable.ic_game_control),
+        Category(0, "Aluguel", R.color.light_yellow, R.drawable.ic_home),
+        Category(0, "Mercado", R.color.grey, R.drawable.ic_home),
+        Category(0, "Transporte", R.color.violet, R.drawable.ic_home),
+        Category(0, "Faculdade", R.color.light_brown, R.drawable.ic_home),
+        Category(0, "IPVA", R.color.red, R.drawable.ic_home),
+        Category(0, "IPTU", R.color.ocean_blue, R.drawable.ic_home),
+        Category(0, "Internet", R.color.blue, R.drawable.ic_home),
+        Category(0, "Agua", R.color.light_orange, R.drawable.ic_home),
+        Category(0, "Energia", R.color.water_blue, R.drawable.ic_home),
+        Category(0, "Lazer", R.color.pink, R.drawable.ic_home),
     )
 
     private val spentList = arrayListOf(
-        Spent(0, "Faculdade", 17.000f, Category(0, "Food", R.color.green, R.drawable.ic_game_control)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
-        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.green, R.drawable.ic_home)),
+        Spent(0, "Faculdade", 17.53f, Category(0, "Food", R.color.medium_orange, R.drawable.ic_game_control)),
+        Spent(0, "House rent", 12.51f, Category(0, "Food", R.color.light_yellow, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.56f, Category(0, "Food", R.color.violet, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.water_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_brown, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.medium_yellow, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.ocean_blue, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.red, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
+        Spent(0, "House rent", 12.000f, Category(0, "Food", R.color.light_green, R.drawable.ic_home)),
     )
 
     private lateinit var binding: ActivityMainBinding

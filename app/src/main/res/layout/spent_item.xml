@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="16dp"
     android:layout_height="78dp"
     android:id="@+id/ctn_spent_card"
@@ -18,8 +19,7 @@
         android:src="@drawable/ic_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtSpentName"
@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="House rent"
-        android:textSize="18dp"
+        android:textSize="24dp"
+        style="@style/TextNormal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgIcon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,13 +36,15 @@
     <TextView
         android:id="@+id/txtSpentValue"
         android:layout_width="wrap_content"
+        style="@style/TextSemiBold"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:textSize="20sp"
+        android:fontFamily="@font/josefin_sans_semibold"
         android:gravity="end"
-        android:text="$12.000,00"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="$12.513.14" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

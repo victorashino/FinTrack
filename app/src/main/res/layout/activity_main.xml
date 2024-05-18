@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".view.MainActivity">
@@ -21,18 +22,22 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:background="@color/white"
                 android:layout_height="wrap_content">
+
+
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/TextNormal"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:gravity="center"
                     android:text="Total Spent"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="32sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,8 +46,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    style="@style/TextSemiBold"
                     android:gravity="center"
-                    android:text="R$ 1259,36"
+                    android:text="$ 1259,36"
                     android:textColor="@color/black"
                     android:textSize="36sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -100,9 +106,10 @@
                     <TextView
                         android:id="@+id/txtNewCategory"
                         android:layout_width="wrap_content"
+                        style="@style/TextNormal"
                         android:layout_height="wrap_content"
                         android:text="New Category"
-                        android:textSize="20dp" />
+                        android:textSize="24dp" />
 
                 </LinearLayout>
 

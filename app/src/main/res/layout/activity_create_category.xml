@@ -5,77 +5,72 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".view.CreateCategoryActivity">
 
     <TextView
         android:id="@+id/txtTitle"
+        style="@style/TextNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FinTrack"
+        android:layout_marginTop="24dp"
+        android:text="@string/app_name"
+        android:textColor="@color/ocean_blue"
         android:textSize="24sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/viewLine"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="24dp"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ctnBack"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/viewLine"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle">
 
         <ImageView
+            android:id="@+id/icBack"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginTop="16dp"
+            android:contentDescription="@string/back"
             android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewLine" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            style="@style/TextSemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:text="@string/back"
             android:textSize="20sp"
-            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/ctnBack"
-            app:layout_constraintStart_toEndOf="@+id/ctnBack"
+            app:layout_constraintStart_toEndOf="@+id/icBack"
             app:layout_constraintTop_toTopOf="@+id/ctnBack" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
         android:id="@+id/txtCreateCategory"
+        style="@style/TextSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Category"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/create_category"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctnBack"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/ctnBack" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,25 +78,813 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtCategoryName"
+            style="@style/TextNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded"
-            android:hint="Category name"
+            android:hint="@string/category_name"
             android:inputType="text"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:textColorHint="#EF14141A"
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnNext"
+    <TextView
+        android:id="@+id/textCategoryIcon"
+        style="@style/TextSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/category_icon"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
+
+    <RelativeLayout
+        android:id="@+id/ctnIconFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:onClick="onIconClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textCategoryIcon"
+        tools:ignore="UsingOnClickInXml">
+
+        <ImageView
+            android:id="@+id/iconKey"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/icon_key"
+            android:src="@drawable/ic_key" />
+
+        <ImageView
+            android:id="@+id/borderKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconKey"
+            android:layout_alignTop="@id/iconKey"
+            android:layout_alignEnd="@+id/iconKey"
+            android:layout_alignBottom="@id/iconKey"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconEnergy"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/iconKey"
+            android:contentDescription="@string/icon_energy"
+            android:src="@drawable/ic_electricity" />
+
+        <ImageView
+            android:id="@+id/borderEnergy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconEnergy"
+            android:layout_alignTop="@id/iconEnergy"
+            android:layout_alignEnd="@+id/iconEnergy"
+            android:layout_alignBottom="@id/iconEnergy"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconWifi"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="16dp"
+            android:layout_toStartOf="@+id/iconEnergy"
+            android:contentDescription="@string/icon_wi_fi"
+            android:src="@drawable/ic_wifi" />
+
+        <ImageView
+            android:id="@+id/borderWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconWifi"
+            android:layout_alignTop="@id/iconWifi"
+            android:layout_alignEnd="@+id/iconWifi"
+            android:layout_alignBottom="@id/iconWifi"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconGasStation"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/iconWifi"
+            android:contentDescription="@string/icon_gas_station"
+            android:src="@drawable/ic_gas_station" />
+
+        <ImageView
+            android:id="@+id/borderImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconGasStation"
+            android:layout_alignTop="@id/iconGasStation"
+            android:layout_alignEnd="@+id/iconGasStation"
+            android:layout_alignBottom="@id/iconGasStation"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ctnIconSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:gravity="center"
+        android:onClick="onColorClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ctnIconFirst"
+        tools:ignore="UsingOnClickInXml">
+
+        <ImageView
+            android:id="@+id/iconHome"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:contentDescription="@string/icon_home"
+            android:src="@drawable/ic_home" />
+
+        <ImageView
+            android:id="@+id/borderHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconHome"
+            android:layout_alignTop="@id/iconHome"
+            android:layout_alignEnd="@+id/iconHome"
+            android:layout_alignBottom="@id/iconHome"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconWaterDrop"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/iconHome"
+            android:contentDescription="@string/icon_water_drop"
+            android:src="@drawable/ic_water_drop" />
+
+        <ImageView
+            android:id="@+id/borderWaterDrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconWaterDrop"
+            android:layout_alignTop="@id/iconWaterDrop"
+            android:layout_alignEnd="@+id/iconWaterDrop"
+            android:layout_alignBottom="@id/iconWaterDrop"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconCreditCard"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:layout_toStartOf="@+id/iconWaterDrop"
+            android:contentDescription="@string/icon_credit_card"
+            android:src="@drawable/ic_credit_card" />
+
+        <ImageView
+            android:id="@+id/borderCreditCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconCreditCard"
+            android:layout_alignTop="@id/iconCreditCard"
+            android:layout_alignEnd="@+id/iconCreditCard"
+            android:layout_alignBottom="@id/iconCreditCard"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconCar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_toStartOf="@+id/iconCreditCard"
+            android:contentDescription="@string/icon_car"
+            android:src="@drawable/ic_car" />
+
+        <ImageView
+            android:id="@+id/borderCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconCar"
+            android:layout_alignTop="@id/iconCar"
+            android:layout_alignEnd="@+id/iconCar"
+            android:layout_alignBottom="@id/iconCar"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ctnIconFourth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:background="@drawable/btn_shape"
-        android:layout_marginBottom="16dp"
-        android:text="Next"
+        android:layout_marginVertical="16dp"
+        android:gravity="center"
+        android:onClick="onColorClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ctnIconSecond"
+        tools:ignore="UsingOnClickInXml">
+
+        <ImageView
+            android:id="@+id/iconShoppingCart"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:contentDescription="@string/icon_shopping_cart"
+            android:src="@drawable/ic_shopping_cart" />
+
+        <ImageView
+            android:id="@+id/borderShoppingCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconShoppingCart"
+            android:layout_alignTop="@id/iconShoppingCart"
+            android:layout_alignEnd="@+id/iconShoppingCart"
+            android:layout_alignBottom="@id/iconShoppingCart"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconGraphic"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/iconShoppingCart"
+            android:contentDescription="@string/icon_graphic"
+            android:src="@drawable/ic_graphic" />
+
+        <ImageView
+            android:id="@+id/borderGraphic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconGraphic"
+            android:layout_alignTop="@id/iconGraphic"
+            android:layout_alignEnd="@+id/iconGraphic"
+            android:layout_alignBottom="@id/iconGraphic"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconClothes"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:layout_toStartOf="@+id/iconGraphic"
+            android:contentDescription="@string/icon_clothes"
+            android:src="@drawable/ic_clothes" />
+
+        <ImageView
+            android:id="@+id/borderClothes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconClothes"
+            android:layout_alignTop="@id/iconClothes"
+            android:layout_alignEnd="@+id/iconClothes"
+            android:layout_alignBottom="@id/iconClothes"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+        <ImageView
+            android:id="@+id/iconGameControl"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_toStartOf="@+id/iconClothes"
+            android:contentDescription="@string/icon_game_control"
+            android:src="@drawable/ic_game_control" />
+
+        <ImageView
+            android:id="@+id/borderGameControl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/iconGameControl"
+            android:layout_alignTop="@id/iconGameControl"
+            android:layout_alignEnd="@+id/iconGameControl"
+            android:layout_alignBottom="@id/iconGameControl"
+            android:layout_gravity="center"
+            android:contentDescription="@string/borda"
+            android:src="@drawable/border_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textCategoryColor"
+        style="@style/TextSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/category_color"
         android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctnIconFourth" />
+
+    <RelativeLayout
+        android:id="@+id/ctnColorFirst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:onClick="onColorClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCategoryColor"
+        tools:ignore="UsingOnClickInXml">
+
+
+        <View
+            android:id="@+id/colorWaterBlue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/color_water_blue"
+            android:contentDescription="@string/water_blue" />
+
+        <ImageView
+            android:id="@+id/checkIconWaterBlue"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorWaterBlue"
+            android:layout_alignTop="@id/colorWaterBlue"
+            android:layout_alignEnd="@+id/colorWaterBlue"
+            android:layout_alignBottom="@id/colorWaterBlue"
+            android:contentDescription="@string/water_blue"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorBlue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorWaterBlue"
+            android:background="@drawable/color_blue"
+            android:contentDescription="@string/blue" />
+
+        <ImageView
+            android:id="@+id/checkIconBlue"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorBlue"
+            android:layout_alignTop="@id/colorBlue"
+            android:layout_alignEnd="@+id/colorBlue"
+            android:layout_alignBottom="@id/colorBlue"
+            android:contentDescription="@string/blue"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorOceanBlue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorBlue"
+            android:background="@drawable/color_ocean_blue"
+            android:contentDescription="@string/ocean_blue" />
+
+        <ImageView
+            android:id="@+id/checkIconOceanBlue"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorOceanBlue"
+            android:layout_alignTop="@id/colorOceanBlue"
+            android:layout_alignEnd="@+id/colorOceanBlue"
+            android:layout_alignBottom="@id/colorOceanBlue"
+            android:contentDescription="@string/ocean_blue"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorViolet"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorOceanBlue"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/color_violet"
+            android:contentDescription="@string/violet" />
+
+        <ImageView
+            android:id="@+id/checkIconViolet"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorViolet"
+            android:layout_alignTop="@id/colorViolet"
+            android:layout_alignEnd="@+id/colorViolet"
+            android:layout_alignBottom="@id/colorViolet"
+            android:contentDescription="@string/violet"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorRed"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorViolet"
+            android:background="@drawable/color_red"
+            android:contentDescription="@string/red" />
+
+        <ImageView
+            android:id="@+id/checkIconRed"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorRed"
+            android:layout_alignTop="@id/colorRed"
+            android:layout_alignEnd="@+id/colorRed"
+            android:layout_alignBottom="@id/colorRed"
+            android:contentDescription="@string/red"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorBlack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorRed"
+            android:background="@drawable/color_black"
+            android:contentDescription="@string/black" />
+
+        <ImageView
+            android:id="@+id/checkIconBlack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorBlack"
+            android:layout_alignTop="@id/colorBlack"
+            android:layout_alignEnd="@+id/colorBlack"
+            android:layout_alignBottom="@id/colorBlack"
+            android:contentDescription="@string/black"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ctnColorSecond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:onClick="onColorClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctnColorFirst"
+        tools:ignore="UsingOnClickInXml">
+
+        <View
+            android:id="@+id/colorLightOrange"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/color_light_orange"
+            android:contentDescription="@string/light_orange" />
+
+        <ImageView
+            android:id="@+id/checkIconLightOrange"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorLightOrange"
+            android:layout_alignTop="@id/colorLightOrange"
+            android:layout_alignEnd="@+id/colorLightOrange"
+            android:layout_alignBottom="@id/colorLightOrange"
+            android:contentDescription="@string/light_orange"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorWaterGreen"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@id/colorLightOrange"
+            android:background="@drawable/color_water_green"
+            android:contentDescription="@string/water_green" />
+
+        <ImageView
+            android:id="@+id/checkIconWaterGreen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorWaterGreen"
+            android:layout_alignTop="@id/colorWaterGreen"
+            android:layout_alignEnd="@+id/colorWaterGreen"
+            android:layout_alignBottom="@id/colorWaterGreen"
+            android:contentDescription="@string/water_green"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorMediumYellow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@id/colorWaterGreen"
+            android:background="@drawable/color_medium_yellow"
+            android:contentDescription="@string/medium_yellow" />
+
+        <ImageView
+            android:id="@+id/checkIconMediumYellow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignStart="@+id/colorMediumYellow"
+            android:layout_alignTop="@id/colorMediumYellow"
+            android:layout_alignEnd="@+id/colorMediumYellow"
+            android:layout_alignBottom="@id/colorMediumYellow"
+            android:contentDescription="@string/medium_yellow"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorLightYellow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorMediumYellow"
+            android:background="@drawable/color_light_yellow"
+            android:contentDescription="@string/light_yellow" />
+
+        <ImageView
+            android:id="@+id/checkIconLightYellow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignStart="@+id/colorLightYellow"
+            android:layout_alignTop="@id/colorLightYellow"
+            android:layout_alignEnd="@+id/colorLightYellow"
+            android:layout_alignBottom="@id/colorLightYellow"
+            android:contentDescription="@string/light_yellow"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorGreen"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorLightYellow"
+            android:background="@drawable/color_light_green"
+            android:contentDescription="@string/green" />
+
+        <ImageView
+            android:id="@+id/checkIconGreen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorGreen"
+            android:layout_alignTop="@id/colorGreen"
+            android:layout_alignEnd="@+id/colorGreen"
+            android:layout_alignBottom="@id/colorGreen"
+            android:contentDescription="@string/green"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorWhite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/checkIconGreen"
+            android:background="@drawable/color_white"
+            android:contentDescription="@string/white" />
+
+        <ImageView
+            android:id="@+id/checkIconWhite"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorWhite"
+            android:layout_alignTop="@id/colorWhite"
+            android:layout_alignEnd="@+id/colorWhite"
+            android:layout_alignBottom="@id/colorWhite"
+            android:contentDescription="@string/white"
+            android:src="@drawable/check_black"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ctnColorThird"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:onClick="onColorClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctnColorSecond"
+        tools:ignore="UsingOnClickInXml">
+
+        <View
+            android:id="@+id/colorPink"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/color_pink"
+            android:contentDescription="@string/pink" />
+
+        <ImageView
+            android:id="@+id/checkIconPink"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorPink"
+            android:layout_alignTop="@id/colorPink"
+            android:layout_alignEnd="@+id/colorPink"
+            android:layout_alignBottom="@id/colorPink"
+            android:contentDescription="@string/pink"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorMediumBrown"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@id/colorPink"
+            android:background="@drawable/color_medium_brown"
+            android:contentDescription="@string/light_brown" />
+
+        <ImageView
+            android:id="@+id/checkIconMediumBrown"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorMediumBrown"
+            android:layout_alignTop="@id/colorMediumBrown"
+            android:layout_alignEnd="@+id/colorMediumBrown"
+            android:layout_alignBottom="@id/colorMediumBrown"
+            android:contentDescription="@string/light_brown"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorMediumGreen"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@id/colorMediumBrown"
+            android:background="@drawable/color_medium_green"
+            android:contentDescription="@string/medium_green" />
+
+        <ImageView
+            android:id="@+id/checkIconMediumGreen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorMediumGreen"
+            android:layout_alignTop="@id/colorMediumGreen"
+            android:layout_alignEnd="@+id/colorMediumGreen"
+            android:layout_alignBottom="@id/colorMediumGreen"
+            android:contentDescription="@string/medium_green"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorGrey"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@id/colorMediumGreen"
+            android:background="@drawable/color_grey"
+            android:contentDescription="@string/grey" />
+
+        <ImageView
+            android:id="@+id/checkIconGrey"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorGrey"
+            android:layout_alignTop="@id/colorGrey"
+            android:layout_alignEnd="@+id/colorGrey"
+            android:layout_alignBottom="@id/colorGrey"
+            android:contentDescription="@string/grey"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorLightBrown"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorGrey"
+            android:background="@drawable/color_light_brown"
+            android:contentDescription="@string/brown" />
+
+        <ImageView
+            android:id="@+id/checkIconBrown"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorLightBrown"
+            android:layout_alignTop="@id/colorLightBrown"
+            android:layout_alignEnd="@+id/colorLightBrown"
+            android:layout_alignBottom="@id/colorLightBrown"
+            android:contentDescription="@string/brown"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/colorMediumOrange"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@+id/colorLightBrown"
+            android:background="@drawable/color_medium_orange"
+            android:contentDescription="@string/medium_orange" />
+
+        <ImageView
+            android:id="@+id/checkIconMediumOrange"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/colorMediumOrange"
+            android:layout_alignTop="@id/colorMediumOrange"
+            android:layout_alignEnd="@+id/colorMediumOrange"
+            android:layout_alignBottom="@id/colorMediumOrange"
+            android:contentDescription="@string/medium_orange"
+            android:src="@drawable/check_white"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <Button
+        style="@style/Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="64dp"
+        android:elevation="16dp"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ctnColorThird" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
