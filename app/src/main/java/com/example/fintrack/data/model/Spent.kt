@@ -1,4 +1,4 @@
-package com.example.fintrack.model
+package com.example.fintrack.data.model
 
 import java.io.Serializable
 

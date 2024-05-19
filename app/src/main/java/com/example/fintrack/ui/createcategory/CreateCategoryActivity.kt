@@ -1,23 +1,30 @@
-package com.example.fintrack.view
+package com.example.fintrack.ui.createcategory
 
+import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.fintrack.R
+import com.example.fintrack.data.model.Category
+import com.example.fintrack.data.repository.ColorRepository
+import com.example.fintrack.data.repository.IconRepository
 import com.example.fintrack.databinding.ActivityCreateCategoryBinding
+import com.example.fintrack.domain.usecase.SelectColorUseCase
+import com.example.fintrack.domain.usecase.SelectIconUseCase
+import com.example.fintrack.ui.main.MainActivity
 import com.example.fintrack.utils.AppUtils
-import com.example.fintrack.view.viewmodel.CreateCategoryViewModel
 
 class CreateCategoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateCategoryBinding
 
-    private val viewModel: CreateCategoryViewModel by viewModels()
+    private lateinit var viewModel: CreateCategoryViewModel
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,29 +35,16 @@ class CreateCategoryActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.icBack.setOnClickListener {
+            AppUtils.back(this)
+        }
 
-        val colors = arrayOf(
-            R.color.black,
-            R.color.white,
-            R.color.red,
-            R.color.violet,
-            R.color.ocean_blue,
-            R.color.blue,
-            R.color.water_blue,
-            R.color.water_green,
-            R.color.light_green,
-            R.color.light_yellow,
-            R.color.medium_yellow,
-            R.color.light_orange,
-            R.color.medium_orange,
-            R.color.light_brown,
-            R.color.grey,
-            R.color.pink,
-            R.color.medium_green,
-            R.color.light_brown
-        )
+        val selectColorUseCase = SelectColorUseCase(ColorRepository(this))
+        val selectIconUseCase = SelectIconUseCase(IconRepository(this))
+        val factory = CreateCategoryViewModel.provideFactory(selectColorUseCase, selectIconUseCase)
+        viewModel = ViewModelProvider(this, factory)[CreateCategoryViewModel::class.java]
 
-        val xmlColorList = listOf(
+        val colorViewList = listOf(
             binding.colorBlack,
             binding.colorWhite,
             binding.colorRed,
@@ -70,7 +64,6 @@ class CreateCategoryActivity : AppCompatActivity() {
             binding.colorMediumGreen,
             binding.colorMediumBrown
         )
-
         val checkIconList = listOf(
             binding.checkIconBlack,
             binding.checkIconWhite,
@@ -91,17 +84,38 @@ class CreateCategoryActivity : AppCompatActivity() {
             binding.checkIconMediumGreen,
             binding.checkIconMediumBrown
         )
-
-        for (color in xmlColorList) {
-            color.setOnClickListener { viewModel.onColorClicked(checkIconList, colors, color) }
+        for (colorView in colorViewList) {
+            colorView.setOnClickListener { viewModel.onColorClicked(checkIconList, colorViewList, colorView) }
         }
 
-        binding.icBack.setOnClickListener {
-            AppUtils.back(this)
+        val iconView = listOf(
+            binding.iconHome,
+            binding.iconCar,
+            binding.iconKey,
+            binding.iconGameControl,
+            binding.iconWifi,
+            binding.iconClothes,
+            binding.iconCreditCard,
+            binding.iconEnergy,
+            binding.iconGasStation,
+            binding.iconGraphic,
+            binding.iconShoppingCart,
+            binding.iconWaterDrop
+        )
+        for (icon in iconView) {
+            icon.setOnClickListener { viewModel.onIconClicked(this, icon, iconView, R.drawable.icon_background_black) }
+        }
+
+        binding.btnSave.setOnClickListener {
+            val color = viewModel.selectedColor
+            val icon = viewModel.selectedIcon
+            val name = binding.edtCategoryName.text.toString()
+            if (color != null && icon != null && name.isNotEmpty()) {
+                // TODO: Save category to database
+                startActivity(MainActivity.startedByCreateCategory(this, 0, name, color, icon))
+            }
         }
 
     }
-
-
-    fun onIconClicked(view: View) {}
 }
+
