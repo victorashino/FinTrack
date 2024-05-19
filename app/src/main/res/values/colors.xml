@@ -18,4 +18,6 @@
     <color name="light_brown">#A0644F</color>
     <color name="medium_brown">#62301E</color>
     <color name="grey">#607D8A</color>
+
+    <color name="grey_selected">#C4C4C4</color>
 </resources>

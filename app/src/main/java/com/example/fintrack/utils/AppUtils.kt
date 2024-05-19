@@ -5,7 +5,10 @@ import android.view.View
 
 class AppUtils {
 
+
     companion object {
+
+        val TAG = "TAG"
 
         fun back(activity: Activity) {
             activity.finish()

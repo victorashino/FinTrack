@@ -57,7 +57,4 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.room.ktx)
 
-    // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.7.1")
-
 }

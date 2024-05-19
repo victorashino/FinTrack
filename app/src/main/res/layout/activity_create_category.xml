@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".view.CreateCategoryActivity">
+    tools:context=".ui.createcategory.CreateCategoryActivity">
 
     <TextView
         android:id="@+id/txtTitle"
@@ -107,7 +107,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:onClick="onIconClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textCategoryIcon"
@@ -119,64 +118,34 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_key"
+            android:padding="2dp"
             android:src="@drawable/ic_key" />
-
-        <ImageView
-            android:id="@+id/borderKey"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconKey"
-            android:layout_alignTop="@id/iconKey"
-            android:layout_alignEnd="@+id/iconKey"
-            android:layout_alignBottom="@id/iconKey"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconEnergy"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:layout_toStartOf="@+id/iconKey"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_energy"
+            android:padding="2dp"
             android:src="@drawable/ic_electricity" />
-
-        <ImageView
-            android:id="@+id/borderEnergy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconEnergy"
-            android:layout_alignTop="@id/iconEnergy"
-            android:layout_alignEnd="@+id/iconEnergy"
-            android:layout_alignBottom="@id/iconEnergy"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconWifi"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="32dp"
             android:layout_toStartOf="@+id/iconEnergy"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_wi_fi"
+            android:padding="3dp"
             android:src="@drawable/ic_wifi" />
-
-        <ImageView
-            android:id="@+id/borderWifi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconWifi"
-            android:layout_alignTop="@id/iconWifi"
-            android:layout_alignEnd="@+id/iconWifi"
-            android:layout_alignBottom="@id/iconWifi"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconGasStation"
@@ -184,20 +153,10 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/iconWifi"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_gas_station"
+            android:padding="2dp"
             android:src="@drawable/ic_gas_station" />
-
-        <ImageView
-            android:id="@+id/borderImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconGasStation"
-            android:layout_alignTop="@id/iconGasStation"
-            android:layout_alignEnd="@+id/iconGasStation"
-            android:layout_alignBottom="@id/iconGasStation"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
     </RelativeLayout>
 
@@ -207,7 +166,6 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="16dp"
         android:gravity="center"
-        android:onClick="onColorClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ctnIconFirst"
@@ -220,20 +178,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_home"
+            android:padding="2dp"
             android:src="@drawable/ic_home" />
-
-        <ImageView
-            android:id="@+id/borderHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconHome"
-            android:layout_alignTop="@id/iconHome"
-            android:layout_alignEnd="@+id/iconHome"
-            android:layout_alignBottom="@id/iconHome"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconWaterDrop"
@@ -241,22 +189,12 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:layout_toStartOf="@+id/iconHome"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_water_drop"
+            android:padding="2dp"
             android:src="@drawable/ic_water_drop" />
-
-        <ImageView
-            android:id="@+id/borderWaterDrop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconWaterDrop"
-            android:layout_alignTop="@id/iconWaterDrop"
-            android:layout_alignEnd="@+id/iconWaterDrop"
-            android:layout_alignBottom="@id/iconWaterDrop"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconCreditCard"
@@ -264,22 +202,12 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="32dp"
             android:layout_toStartOf="@+id/iconWaterDrop"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_credit_card"
+            android:padding="2dp"
             android:src="@drawable/ic_credit_card" />
-
-        <ImageView
-            android:id="@+id/borderCreditCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconCreditCard"
-            android:layout_alignTop="@id/iconCreditCard"
-            android:layout_alignEnd="@+id/iconCreditCard"
-            android:layout_alignBottom="@id/iconCreditCard"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconCar"
@@ -288,20 +216,10 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_toStartOf="@+id/iconCreditCard"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_car"
+            android:padding="2dp"
             android:src="@drawable/ic_car" />
-
-        <ImageView
-            android:id="@+id/borderCar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconCar"
-            android:layout_alignTop="@id/iconCar"
-            android:layout_alignEnd="@+id/iconCar"
-            android:layout_alignBottom="@id/iconCar"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
     </RelativeLayout>
 
@@ -311,7 +229,6 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="16dp"
         android:gravity="center"
-        android:onClick="onColorClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ctnIconSecond"
@@ -324,20 +241,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_shopping_cart"
+            android:padding="2dp"
             android:src="@drawable/ic_shopping_cart" />
-
-        <ImageView
-            android:id="@+id/borderShoppingCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconShoppingCart"
-            android:layout_alignTop="@id/iconShoppingCart"
-            android:layout_alignEnd="@+id/iconShoppingCart"
-            android:layout_alignBottom="@id/iconShoppingCart"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconGraphic"
@@ -345,22 +252,12 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:layout_toStartOf="@+id/iconShoppingCart"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_graphic"
+            android:padding="2dp"
             android:src="@drawable/ic_graphic" />
-
-        <ImageView
-            android:id="@+id/borderGraphic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconGraphic"
-            android:layout_alignTop="@id/iconGraphic"
-            android:layout_alignEnd="@+id/iconGraphic"
-            android:layout_alignBottom="@id/iconGraphic"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconClothes"
@@ -368,22 +265,12 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="32dp"
             android:layout_toStartOf="@+id/iconGraphic"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_clothes"
+            android:padding="2dp"
             android:src="@drawable/ic_clothes" />
-
-        <ImageView
-            android:id="@+id/borderClothes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconClothes"
-            android:layout_alignTop="@id/iconClothes"
-            android:layout_alignEnd="@+id/iconClothes"
-            android:layout_alignBottom="@id/iconClothes"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
         <ImageView
             android:id="@+id/iconGameControl"
@@ -392,20 +279,10 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_toStartOf="@+id/iconClothes"
+            android:background="@drawable/icon_background_white"
             android:contentDescription="@string/icon_game_control"
+            android:padding="2dp"
             android:src="@drawable/ic_game_control" />
-
-        <ImageView
-            android:id="@+id/borderGameControl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/iconGameControl"
-            android:layout_alignTop="@id/iconGameControl"
-            android:layout_alignEnd="@+id/iconGameControl"
-            android:layout_alignBottom="@id/iconGameControl"
-            android:layout_gravity="center"
-            android:contentDescription="@string/borda"
-            android:src="@drawable/border_icon" />
 
     </RelativeLayout>
 
@@ -441,7 +318,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
             android:background="@drawable/color_water_blue"
             android:contentDescription="@string/water_blue" />
 
@@ -463,7 +339,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorWaterBlue"
             android:background="@drawable/color_blue"
             android:contentDescription="@string/blue" />
@@ -486,7 +362,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorBlue"
             android:background="@drawable/color_ocean_blue"
             android:contentDescription="@string/ocean_blue" />
@@ -507,9 +383,9 @@
             android:id="@+id/colorViolet"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="12dp"
-            android:layout_toStartOf="@+id/colorOceanBlue"
             android:layout_alignParentTop="true"
+            android:layout_marginEnd="18dp"
+            android:layout_toStartOf="@+id/colorOceanBlue"
             android:background="@drawable/color_violet"
             android:contentDescription="@string/violet" />
 
@@ -531,7 +407,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorViolet"
             android:background="@drawable/color_red"
             android:contentDescription="@string/red" />
@@ -554,7 +430,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorRed"
             android:background="@drawable/color_black"
             android:contentDescription="@string/black" />
@@ -591,7 +467,6 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="12dp"
             android:background="@drawable/color_light_orange"
             android:contentDescription="@string/light_orange" />
 
@@ -611,8 +486,8 @@
             android:id="@+id/colorWaterGreen"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="12dp"
             android:layout_alignParentTop="true"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@id/colorLightOrange"
             android:background="@drawable/color_water_green"
             android:contentDescription="@string/water_green" />
@@ -635,7 +510,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@id/colorWaterGreen"
             android:background="@drawable/color_medium_yellow"
             android:contentDescription="@string/medium_yellow" />
@@ -658,7 +533,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorMediumYellow"
             android:background="@drawable/color_light_yellow"
             android:contentDescription="@string/light_yellow" />
@@ -681,7 +556,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorLightYellow"
             android:background="@drawable/color_light_green"
             android:contentDescription="@string/green" />
@@ -704,7 +579,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/checkIconGreen"
             android:background="@drawable/color_white"
             android:contentDescription="@string/white" />
@@ -739,9 +614,8 @@
             android:id="@+id/colorPink"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="12dp"
+            android:layout_alignParentEnd="true"
             android:background="@drawable/color_pink"
             android:contentDescription="@string/pink" />
 
@@ -763,7 +637,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@id/colorPink"
             android:background="@drawable/color_medium_brown"
             android:contentDescription="@string/light_brown" />
@@ -786,7 +660,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@id/colorMediumBrown"
             android:background="@drawable/color_medium_green"
             android:contentDescription="@string/medium_green" />
@@ -809,7 +683,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@id/colorMediumGreen"
             android:background="@drawable/color_grey"
             android:contentDescription="@string/grey" />
@@ -832,7 +706,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorGrey"
             android:background="@drawable/color_light_brown"
             android:contentDescription="@string/brown" />
@@ -855,7 +729,7 @@
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="18dp"
             android:layout_toStartOf="@+id/colorLightBrown"
             android:background="@drawable/color_medium_orange"
             android:contentDescription="@string/medium_orange" />
@@ -874,17 +748,17 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btnSave"
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="64dp"
-        android:elevation="16dp"
         android:text="@string/save"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:paddingVertical="8dp"
+        android:layout_marginHorizontal="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ctnColorThird" />
+        app:layout_constraintTop_toBottomOf="@+id/ctnColorThird" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
