@@ -1,6 +1,7 @@
 package com.example.fintrack.ui.main
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
@@ -45,7 +46,7 @@ class CategoryAdapter : ListAdapter<Category, CategoryViewHolder>(CategoryAdapte
     }
 }
 
-class CategoryViewHolder(private val binding: CategoryItemBinding, isSelected: Boolean = false) :
+class CategoryViewHolder(private val binding: CategoryItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("ResourceAsColor")

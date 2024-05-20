@@ -14,13 +14,13 @@ interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(category: Category)
 
-    @Query("SELECT * FROM Category")
+    @Query("SELECT * FROM categories")
     fun getAll(): LiveData<List<Category>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(category: Category)
 
-    @Query("DELETE FROM Category WHERE id = :id")
+    @Query("DELETE FROM categories WHERE id = :id")
     fun deleteById(id: Int)
 
 }

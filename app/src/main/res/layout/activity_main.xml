@@ -110,8 +110,8 @@
 
                     <ImageView
                         android:id="@+id/IconNewCategory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:src="@drawable/ic_add" />
 
                     <TextView
@@ -119,8 +119,8 @@
                         style="@style/TextNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="New Category"
-                        android:textSize="24dp" />
+                        android:text="New category"
+                        android:textSize="20dp" />
 
                 </LinearLayout>
 
