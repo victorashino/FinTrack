@@ -13,7 +13,7 @@ import com.example.fintrack.databinding.SpentItemBinding
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.ColorRepository
 
-class SpentAdapter(private val spents: List<Spent>) :
+class SpentAdapter :
     ListAdapter<Spent, SpentViewHolder>(SpentAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpentViewHolder {
@@ -22,7 +22,7 @@ class SpentAdapter(private val spents: List<Spent>) :
     }
 
     override fun onBindViewHolder(holder: SpentViewHolder, position: Int) {
-        val spent = spents[position]
+        val spent = getItem(position)
         holder.bind(spent)
     }
 
@@ -57,7 +57,7 @@ class SpentViewHolder(private val binding: SpentItemBinding) : RecyclerView.View
         val layerDrawable = binding.ctnSpentCard.background as LayerDrawable
 
         val borderDrawable = layerDrawable.findDrawableByLayerId(R.id.border) as GradientDrawable
-        borderDrawable.setStroke(2, color)
+        borderDrawable.setStroke(3, color)
         val itemSideDrawable = layerDrawable.findDrawableByLayerId(R.id.itemSide) as GradientDrawable
         itemSideDrawable.setColor(color)
 

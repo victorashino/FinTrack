@@ -1,39 +1,24 @@
 package com.example.fintrack.ui.main
 
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.InvalidationTracker
 import com.example.fintrack.R
-import com.example.fintrack.databinding.ActivityMainBinding
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
+import com.example.fintrack.databinding.ActivityMainBinding
 import com.example.fintrack.ui.createcategory.CreateCategoryActivity
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private const val EXTRA_ID= "EXTRA_ID"
-        private const val EXTRA_NAME= "EXTRA_NAME"
-        private const val EXTRA_COLOR= "EXTRA_COLOR"
-        private const val EXTRA_ICON = "EXTRA_ICON"
-
-        fun startedByCreateCategory(context: Context, id: Int, name: String, color: Int, icon: Int): Intent {
-            return Intent(context, MainActivity::class.java).apply {
-                putExtra(EXTRA_ID, id)
-                putExtra(EXTRA_NAME, name)
-                putExtra(EXTRA_COLOR, color)
-                putExtra(EXTRA_ICON, icon)
-            }
-        }
-    }
-
-    private val categoryList = arrayListOf<Category>(
+    private val categoryList = arrayListOf(
         Category(0, "All", R.color.black, R.drawable.ic_game_control),
         Category(0, "Escola", R.color.medium_orange, R.drawable.ic_game_control),
         Category(0, "Aluguel", R.color.water_green, R.drawable.ic_home),
@@ -76,9 +61,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val categoryAdapter: CategoryAdapter by lazy { CategoryAdapter(categoryList) }
+    private val categoryAdapter: CategoryAdapter by lazy { CategoryAdapter() }
 
-    private val spentAdapter: SpentAdapter by lazy { SpentAdapter(spentList) }
+    private val spentAdapter: SpentAdapter by lazy { SpentAdapter() }
+
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,13 +81,35 @@ class MainActivity : AppCompatActivity() {
         rvSpent.adapter = spentAdapter
         spentAdapter.submitList(spentList)
 
-        val rvCategory = findViewById<RecyclerView>(R.id.rvCategory)
+        val rvCategory = binding.rvCategory
         rvCategory.adapter = categoryAdapter
         categoryAdapter.submitList(categoryList)
+
+        /*setupRecyclerView()
+        observeViewModel()*/
 
         binding.btnNewCategory.setOnClickListener {
             startActivity(Intent(this, CreateCategoryActivity::class.java))
         }
+    }
 
+    private fun setupRecyclerView() {
+        val categoryAdapter = CategoryAdapter()
+        binding.rvCategory.apply {
+            adapter = categoryAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.categories.observe(this) { categories ->
+            categories?.let {
+                updateRecyclerView(categories)
+            }
+        }
+    }
+
+    private fun updateRecyclerView(categories: List<Category>) {
+        categoryAdapter.submitList(categories)
     }
 }
