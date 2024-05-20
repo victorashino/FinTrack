@@ -14,7 +14,7 @@
         android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextNormal"
+        style="@style/TextSemiBold"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="4dp"
         android:textColor="@color/white"

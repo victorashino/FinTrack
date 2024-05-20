@@ -1,9 +1,12 @@
 package com.example.fintrack.ui.main
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,22 +15,22 @@ import com.example.fintrack.R
 import com.example.fintrack.databinding.CategoryItemBinding
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.repository.ColorRepository
+import com.example.fintrack.domain.usecase.SelectColorUseCase
 import kotlin.coroutines.coroutineContext
 
-class CategoryAdapter(
-    private val categorys: List<Category>
-) : ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {
+class CategoryAdapter : ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val binding = CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categorys[position]
+        val category = getItem(position)
         holder.bind(category)
-    }
 
+    }
 
     companion object : DiffUtil.ItemCallback<Category>() {
 
@@ -43,18 +46,20 @@ class CategoryAdapter(
     }
 }
 
-class CategoryViewHolder(private val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class CategoryViewHolder(private val binding: CategoryItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("ResourceAsColor")
     fun bind(category: Category) {
 
         val name = binding.categoryName
-        name.text = "${category.name}"
-
+        name.text = category.name
+        name.setTextColor(ContextCompat.getColor(binding.root.context, category.color))
 
         val context = binding.root.context
         val color = ContextCompat.getColor(context, category.color)
         val background = binding.ctnCategoryItem.background as GradientDrawable
-        background.setColor(color)
+        background.setStroke(3, color)
 
     }
 

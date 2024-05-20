@@ -57,4 +57,9 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.room.ktx)
 
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+
 }
