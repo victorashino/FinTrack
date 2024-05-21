@@ -7,7 +7,7 @@ import java.io.Serializable
 @Entity(tableName = "categories")
 data class Category (
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Int,
     val name: String,
     val color: Int,
     val icon: Int

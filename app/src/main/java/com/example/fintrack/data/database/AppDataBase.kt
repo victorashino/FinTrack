@@ -1,29 +1,17 @@
 package com.example.fintrack.data.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.fintrack.data.model.Category
+import com.example.fintrack.data.model.Spent
 
-@Database(entities = [Category::class], version = 1)
+@Database(entities = [Category::class, Spent::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
+
     abstract fun categoryDao(): CategoryDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: AppDataBase? = null
+    abstract fun spentDao(): SpentDao
 
-        fun getDatabase(context: Context): AppDataBase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDataBase::class.java,
-                    "fin_track_db"
-                ).build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
 }

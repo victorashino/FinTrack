@@ -28,8 +28,8 @@ class ColorRepository(private val context: Context) {
         R.color.grey,
         R.color.pink,
         R.color.medium_green,
-        R.color.light_brown,
-        R.color.grey_selected
+        R.color.medium_brown,
+        R.color.white_shadow
     )
 
 }

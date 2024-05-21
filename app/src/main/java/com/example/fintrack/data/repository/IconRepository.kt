@@ -26,6 +26,7 @@ class IconRepository(private val context: Context) {
         R.drawable.ic_graphic,
         R.drawable.ic_shopping_cart,
         R.drawable.ic_water_drop,
+        R.drawable.ic_add
     )
 
 

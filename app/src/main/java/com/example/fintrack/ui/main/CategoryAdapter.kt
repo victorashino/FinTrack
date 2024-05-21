@@ -18,18 +18,18 @@ import com.example.fintrack.data.repository.ColorRepository
 import com.example.fintrack.domain.usecase.SelectColorUseCase
 import kotlin.coroutines.coroutineContext
 
-class CategoryAdapter : ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {
+class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
+    ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding =
             CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoryViewHolder(binding)
+        return CategoryViewHolder(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = getItem(position)
         holder.bind(category)
-
     }
 
     companion object : DiffUtil.ItemCallback<Category>() {
@@ -46,21 +46,28 @@ class CategoryAdapter : ListAdapter<Category, CategoryViewHolder>(CategoryAdapte
     }
 }
 
-class CategoryViewHolder(private val binding: CategoryItemBinding) :
+class CategoryViewHolder(
+    private val binding: CategoryItemBinding,
+    private val onItemClick: (Category) -> Unit
+) :
     RecyclerView.ViewHolder(binding.root) {
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "ResourceType")
     fun bind(category: Category) {
+
+        val context: Context = binding.root.context
+        val color = ContextCompat.getColor(context, category.color)
 
         val name = binding.categoryName
         name.text = category.name
-        name.setTextColor(ContextCompat.getColor(binding.root.context, category.color))
+        name.setTextColor(ContextCompat.getColor(context, category.color))
 
-        val context = binding.root.context
-        val color = ContextCompat.getColor(context, category.color)
         val background = binding.ctnCategoryItem.background as GradientDrawable
         background.setStroke(3, color)
 
-    }
+        binding.root.setOnClickListener {
+            onItemClick(category)
 
+        }
+    }
 }

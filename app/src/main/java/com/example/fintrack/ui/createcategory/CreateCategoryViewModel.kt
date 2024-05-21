@@ -17,28 +17,31 @@ import com.example.fintrack.R
 import com.example.fintrack.data.database.AppDataBase
 import com.example.fintrack.data.database.CategoryDao
 import com.example.fintrack.data.model.Category
+import com.example.fintrack.data.repository.CategoryRepository
 import com.example.fintrack.data.repository.ColorRepository
 import com.example.fintrack.data.repository.IconRepository
 import com.example.fintrack.domain.usecase.SelectColorUseCase
 import com.example.fintrack.domain.usecase.SelectIconUseCase
+import com.example.fintrack.ui.main.MainViewModel
 import com.example.fintrack.utils.FinTrackApplication
 import kotlinx.coroutines.launch
 
-class CreateCategoryViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val dataBase: AppDataBase = (application as FinTrackApplication).getDataBase()
+class CreateCategoryViewModel(private val categoryRepository: CategoryRepository, application: Application) : AndroidViewModel(application) {
 
     fun insertIntoDatabase(category: Category) {
         viewModelScope.launch {
-            dataBase.categoryDao().insert(category)
+            categoryRepository.insert(category)
         }
     }
 
     companion object {
         fun getVMFactory(application: Application): ViewModelProvider.Factory {
+            val dataBaseInstance = (application as FinTrackApplication).dataBase
+            val categoryRepository = CategoryRepository(dataBaseInstance.categoryDao())
             val factory = object : ViewModelProvider.Factory {
+
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return CreateCategoryViewModel(application) as T
+                    return CreateCategoryViewModel(categoryRepository, application) as T
                 }
             }
             return factory
