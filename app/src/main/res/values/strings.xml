@@ -39,4 +39,7 @@
     <string name="save">Save</string>
     <string name="light_brown">light brown</string>
     <string name="medium_green">medium green</string>
+    <string name="new_spent">New spent</string>
+    <string name="spent_name">Name</string>
+    <string name="spent_price">Price</string>
 </resources>

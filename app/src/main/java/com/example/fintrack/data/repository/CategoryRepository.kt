@@ -9,7 +9,9 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
     val allCategories: LiveData<List<Category>> = categoryDao.getAll()
 
     suspend fun insert(category: Category) {
-        categoryDao.insert(category)
+        val existingCategory = categoryDao.getCategoryByName(category.name)
+        if (existingCategory == null) {
+            categoryDao.insert(category)
+        }
     }
-
 }

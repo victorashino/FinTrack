@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#1A1B22</color>
     <color name="white">#ECF3F8</color>
-    <color name="red">#FF3122</color>
+    <color name="red">#FF1515</color>
     <color name="pink">#EA1E61</color>
     <color name="violet">#9D28AC</color>
     <color name="ocean_blue">#3F51B2</color>
@@ -11,13 +11,13 @@
     <color name="water_green">#009689</color>
     <color name="light_green">#4AAF57</color>
     <color name="medium_green">#037111</color>
-    <color name="light_yellow">#FFEB4F</color>
+    <color name="light_yellow">#FFE622</color>
     <color name="medium_yellow">#FFC02D</color>
-    <color name="light_orange">#FF981F</color>
-    <color name="medium_orange">#FF5726</color>
+    <color name="light_orange">#FF9315</color>
+    <color name="medium_orange">#FF4F1B</color>
     <color name="light_brown">#A0644F</color>
     <color name="medium_brown">#62301E</color>
     <color name="grey">#607D8A</color>
 
-    <color name="grey_selected">#C4C4C4</color>
+    <color name="white_shadow">#DADADA</color>
 </resources>

@@ -16,12 +16,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
+import com.example.fintrack.data.repository.CategoryRepository
 import com.example.fintrack.data.repository.ColorRepository
 import com.example.fintrack.data.repository.IconRepository
 import com.example.fintrack.databinding.ActivityCreateCategoryBinding
 import com.example.fintrack.domain.usecase.SelectColorUseCase
 import com.example.fintrack.domain.usecase.SelectIconUseCase
 import com.example.fintrack.ui.main.MainActivity
+import com.example.fintrack.ui.main.MainViewModel
 import com.example.fintrack.utils.AppUtils
 import com.google.android.material.snackbar.Snackbar
 
@@ -29,7 +31,9 @@ class CreateCategoryActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateCategoryBinding
 
-    private lateinit var viewModel: CreateCategoryViewModel
+    private val viewModel: CreateCategoryViewModel by viewModels {
+        CreateCategoryViewModel.getVMFactory(application)
+    }
 
     private val selectColorUseCase: SelectColorUseCase = SelectColorUseCase(ColorRepository(this))
     private val colors: Array<Int> = selectColorUseCase.getAllColors()
@@ -51,10 +55,8 @@ class CreateCategoryActivity() : AppCompatActivity() {
             insets
         }
 
-        viewModel = ViewModelProvider(this)[CreateCategoryViewModel::class.java]
-
         binding.icBack.setOnClickListener {
-            AppUtils.back(this)
+            finish()
         }
 
         val colorViewList = listOf(
@@ -117,16 +119,18 @@ class CreateCategoryActivity() : AppCompatActivity() {
         )
         for (icon in iconView) {
             icon.setOnClickListener {
-                val iconId = it.id
                 onIconClicked(this, icon, iconView, R.drawable.icon_background_black)
             }
         }
 
         binding.btnSave.setOnClickListener {
+
             val name = binding.edtCategoryName.text.toString()
+
             if (name.isNotEmpty() && selectedColor != null && selectedIcon != null) {
                 val category = Category(0, name, selectedColor!!, selectedIcon!!)
                 viewModel.insertIntoDatabase(category)
+
                 Toast.makeText(this, "$name category successfully created", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
@@ -159,7 +163,7 @@ class CreateCategoryActivity() : AppCompatActivity() {
         }
         selectedColor = when (view.id) {
             colorViewList[0].id -> colors[0]
-            colorViewList[1].id -> colors[1]
+            colorViewList[1].id -> colors[18]
             colorViewList[2].id -> colors[2]
             colorViewList[3].id -> colors[3]
             colorViewList[4].id -> colors[4]
