@@ -566,7 +566,7 @@
             android:visibility="invisible" />
 
         <View
-            android:id="@+id/colorWhite"
+            android:id="@+id/colorWhiteShadow"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
@@ -579,10 +579,10 @@
             android:id="@+id/checkIconWhite"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_alignStart="@+id/colorWhite"
-            android:layout_alignTop="@id/colorWhite"
-            android:layout_alignEnd="@+id/colorWhite"
-            android:layout_alignBottom="@id/colorWhite"
+            android:layout_alignStart="@+id/colorWhiteShadow"
+            android:layout_alignTop="@id/colorWhiteShadow"
+            android:layout_alignEnd="@+id/colorWhiteShadow"
+            android:layout_alignBottom="@id/colorWhiteShadow"
             android:contentDescription="@string/white"
             android:src="@drawable/check_black"
             android:visibility="invisible" />

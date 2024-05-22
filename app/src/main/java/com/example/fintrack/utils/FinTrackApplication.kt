@@ -45,7 +45,7 @@ class FinTrackApplication : Application() {
                     Category(
                         0,
                         "All",
-                        R.color.black,
+                        "black",
                         R.drawable.ic_add
                     )
                 )

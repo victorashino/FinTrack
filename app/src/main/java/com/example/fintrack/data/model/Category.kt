@@ -9,6 +9,6 @@ data class Category (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val color: Int,
+    val color: String,
     val icon: Int
 ) : Serializable

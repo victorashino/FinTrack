@@ -72,26 +72,42 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="32dp"
                     android:background="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/rvCategory"
+                    app:layout_constraintBottom_toTopOf="@+id/categoryLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvCategory"
+                <LinearLayout
+                    android:id="@+id/categoryLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"
-                    android:paddingHorizontal="16dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toTopOf="@id/btnAdd"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/division"
-                    tools:listitem="@layout/category_item" />
+                    android:orientation="vertical" >
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:contentDescription="Category"
+                        android:background="@android:color/transparent"
+                        app:tabMode="scrollable"
+                        android:orientation="horizontal" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="8dp"
+                        android:paddingBottom="16dp"
+                        android:clipToPadding="false"
+                        tools:listitem="@layout/category_item"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btnAdd"
@@ -105,7 +121,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rvCategory">
+                    app:layout_constraintTop_toBottomOf="@id/categoryLayout">
 
                     <ImageView
                         android:id="@+id/IconNewSpent"
@@ -144,7 +160,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvCategory"
+            app:layout_constraintTop_toBottomOf="@+id/categoryLayout"
             tools:listitem="@layout/spent_item" />
 
     </androidx.core.widget.NestedScrollView>

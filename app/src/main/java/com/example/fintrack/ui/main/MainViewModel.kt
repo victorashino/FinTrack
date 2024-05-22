@@ -41,7 +41,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun selectCategoryAll() {
-        selectedCategory.value = Category(0, "All", R.color.black, R.drawable.ic_add)
+        selectedCategory.value = Category(0, "All", "black", R.drawable.ic_add)
     }
 
     companion object {

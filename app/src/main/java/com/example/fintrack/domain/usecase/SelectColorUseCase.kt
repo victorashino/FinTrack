@@ -8,8 +8,12 @@ class SelectColorUseCase(private val colorRepository: ColorRepository) {
         return colorRepository.getColorResourceById(colorId)
     }
 
+    fun getAllColorsString(): Array<String> {
+        return colorRepository.colorMap.keys.toTypedArray()
+    }
+
     fun getAllColors(): Array<Int> {
-        return colorRepository.colors
+        return colorRepository.colorMap.values.toTypedArray()
     }
 
 }

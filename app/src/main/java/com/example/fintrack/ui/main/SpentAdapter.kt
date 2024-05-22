@@ -1,5 +1,6 @@
 package com.example.fintrack.ui.main
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import com.example.fintrack.R
 import com.example.fintrack.databinding.SpentItemBinding
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.ColorRepository
+import com.example.fintrack.data.repository.IconRepository
+import com.example.fintrack.domain.usecase.SelectColorUseCase
 
 class SpentAdapter :
     ListAdapter<Spent, SpentViewHolder>(SpentAdapter) {
@@ -38,9 +41,12 @@ class SpentAdapter :
     }
 }
 
-class SpentViewHolder(private val binding: SpentItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class SpentViewHolder(private val binding: SpentItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("ResourceType")
     fun bind(spent: Spent) {
+        val context = binding.root.context
 
         val name = binding.txtSpentName
         name.text = spent.name
@@ -48,41 +54,24 @@ class SpentViewHolder(private val binding: SpentItemBinding) : RecyclerView.View
         val value = binding.txtSpentValue
         value.text = "$${spent.value}"
 
+        val categoryColor = ContextCompat.getColor(context, ColorRepository(context).getColor(spent.category.color))
+
         val icon = binding.imgIcon
         icon.setImageResource(spent.category.icon)
-        icon.setColorFilter(ContextCompat.getColor(icon.context, ColorRepository(icon.context).colors[1]))
+        icon.setColorFilter(ContextCompat.getColor(icon.context, R.color.white))
 
-        val context = binding.root.context
-        val color = ContextCompat.getColor(context, spent.category.color)
         val layerDrawable = binding.ctnSpentCard.background as LayerDrawable
 
         val borderDrawable = layerDrawable.findDrawableByLayerId(R.id.border) as GradientDrawable
-        borderDrawable.setStroke(3, color)
-        val itemSideDrawable = layerDrawable.findDrawableByLayerId(R.id.itemSide) as GradientDrawable
-        itemSideDrawable.setColor(color)
+        borderDrawable.setStroke(3, categoryColor)
+        val itemSideDrawable =
+            layerDrawable.findDrawableByLayerId(R.id.itemSide) as GradientDrawable
+        itemSideDrawable.setColor(categoryColor)
 
+
+        binding.root.setOnLongClickListener {
+
+            true // Retorna verdadeiro para indicar que o clique longo foi tratado
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
