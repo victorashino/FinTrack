@@ -62,9 +62,12 @@ class CategoryViewHolder(
         name.text = category.name
         name.setTextColor(ContextCompat.getColor(context, color))
 
-        val borderColor = ColorRepository(context).getColor(category.color)
         val background = binding.ctnCategoryItem.background as GradientDrawable
         background.setStroke(3, ContextCompat.getColor(context, borderColor))
+        background.setStroke(
+            3,
+            ContextCompat.getColor(context, ColorRepository(context).getColor(category.color))
+        )
 
         binding.root.setOnClickListener {
             onItemClick(category)
