@@ -13,7 +13,7 @@ import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityCreateSpentBinding
-import com.example.fintrack.ui.createcategory.CreateCategoryViewModel
+import com.example.fintrack.ui.main.MainActivity
 
 class CreateSpentActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class CreateSpentActivity : AppCompatActivity() {
         private const val EXTRA_CATEGORY_COLOR = "extra_category_color"
         private const val EXTRA_CATEGORY_ICON = "extra_category_icon"
 
-        fun startByMain(context: Context, id: Int, name: String, color: Int, icon: Int): Intent {
+        fun startByMain(context: Context, id: Int, name: String, color: String, icon: Int): Intent {
             return Intent(context, CreateSpentActivity::class.java)
                 .apply {
                     putExtra(EXTRA_CATEGORY_ID, id)
@@ -56,27 +56,35 @@ class CreateSpentActivity : AppCompatActivity() {
 
         val categoryId = intent.getIntExtra(EXTRA_CATEGORY_ID, 0)
         val categoryName = intent.getStringExtra(EXTRA_CATEGORY_NAME)
-        val categoryColor = intent.getIntExtra(EXTRA_CATEGORY_COLOR, 0)
+        val categoryColor = intent.getStringExtra(EXTRA_CATEGORY_COLOR)
         val categoryIcon = intent.getIntExtra(EXTRA_CATEGORY_ICON, 0)
 
-        selectedCategory = Category(categoryId, categoryName!!, categoryColor, categoryIcon)
-
-        val name = binding.edtSpentName.text.toString()
-        val priceString = binding.edtSpentPrice.text.toString()
+        selectedCategory = Category(categoryId, categoryName!!, categoryColor!!, categoryIcon)
 
         binding.btnSave.setOnClickListener {
-            if (priceString.isNotEmpty() && name.isNotEmpty()) {
+            val name = binding.edtSpentName.text.toString()
+            val priceString = binding.edtSpentPrice.text.toString()
+
+            if (priceString.isNotEmpty() && name.isNotEmpty() && selectedCategory.id != 0) {
                 val price = priceString.toFloat()
                 val newSpent = Spent(0, name, price, selectedCategory.id, selectedCategory)
-                saveSpent(newSpent)
-                finish()
+                try {
+                    saveSpent(newSpent)
+                    Toast.makeText(this, "$name spent successfully created", Toast.LENGTH_SHORT)
+                        .show()
+                    finish()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Error saving spent", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             } else {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
+        }
 
-            binding.icBack.setOnClickListener {
-                finish()
-            }
+        binding.ctnBack.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

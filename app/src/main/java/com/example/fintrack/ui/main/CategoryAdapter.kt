@@ -56,18 +56,18 @@ class CategoryViewHolder(
     fun bind(category: Category) {
 
         val context: Context = binding.root.context
-        val color = ContextCompat.getColor(context, category.color)
+        val color = ColorRepository(context).getColor(category.color)
 
         val name = binding.categoryName
         name.text = category.name
-        name.setTextColor(ContextCompat.getColor(context, category.color))
+        name.setTextColor(ContextCompat.getColor(context, color))
 
+        val borderColor = ColorRepository(context).getColor(category.color)
         val background = binding.ctnCategoryItem.background as GradientDrawable
-        background.setStroke(3, color)
+        background.setStroke(3, ContextCompat.getColor(context, borderColor))
 
         binding.root.setOnClickListener {
             onItemClick(category)
-
         }
     }
 }

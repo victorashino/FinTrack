@@ -12,7 +12,6 @@ import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityMainBinding
 import com.example.fintrack.ui.createspent.CreateSpentActivity
 import com.example.fintrack.ui.createcategory.CreateCategoryActivity
-import com.example.fintrack.utils.AppUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,12 +61,12 @@ class MainActivity : AppCompatActivity() {
                     val id = category.id
                     val name = category.name
                     val icon = category.icon
-                    val color = category.color
-                    startActivity(CreateSpentActivity.startByMain(this, id, name, icon, color))
+                    val color: String = category.color
+                    startActivity(CreateSpentActivity.startByMain(this, id, name, color, icon))
                 }
             }
         } else {
-            Log.i(AppUtils.TAG, "updateButton: category is null")
+            Log.i("category_null", "updateButton: category is null")
         }
     }
 

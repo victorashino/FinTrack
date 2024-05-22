@@ -13,19 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
-import com.example.fintrack.data.repository.CategoryRepository
 import com.example.fintrack.data.repository.ColorRepository
 import com.example.fintrack.data.repository.IconRepository
 import com.example.fintrack.databinding.ActivityCreateCategoryBinding
 import com.example.fintrack.domain.usecase.SelectColorUseCase
 import com.example.fintrack.domain.usecase.SelectIconUseCase
-import com.example.fintrack.ui.main.MainActivity
-import com.example.fintrack.ui.main.MainViewModel
-import com.example.fintrack.utils.AppUtils
-import com.google.android.material.snackbar.Snackbar
 
 class CreateCategoryActivity() : AppCompatActivity() {
 
@@ -36,8 +30,9 @@ class CreateCategoryActivity() : AppCompatActivity() {
     }
 
     private val selectColorUseCase: SelectColorUseCase = SelectColorUseCase(ColorRepository(this))
-    private val colors: Array<Int> = selectColorUseCase.getAllColors()
-    private var selectedColor: Int? = null
+    private val colorsString: Array<String> = selectColorUseCase.getAllColorsString()
+    private val color: Array<Int> = selectColorUseCase.getAllColors()
+    private var selectedColor: String? = null
 
     private val selectIconUseCase: SelectIconUseCase = SelectIconUseCase(IconRepository(this))
     private val icons: Array<Int> = selectIconUseCase.getAllIcons()
@@ -61,7 +56,7 @@ class CreateCategoryActivity() : AppCompatActivity() {
 
         val colorViewList = listOf(
             binding.colorBlack,
-            binding.colorWhite,
+            binding.colorWhiteShadow,
             binding.colorRed,
             binding.colorViolet,
             binding.colorOceanBlue,
@@ -127,7 +122,7 @@ class CreateCategoryActivity() : AppCompatActivity() {
 
             val name = binding.edtCategoryName.text.toString()
 
-            if (name.isNotEmpty() && selectedColor != null && selectedIcon != null) {
+            if (name.isNotEmpty() && selectedColor!!.isNotEmpty() && selectedIcon != null) {
                 val category = Category(0, name, selectedColor!!, selectedIcon!!)
                 viewModel.insertIntoDatabase(category)
 
@@ -162,24 +157,24 @@ class CreateCategoryActivity() : AppCompatActivity() {
             colorViewList[17].id  -> checkIconList[17].visibility = View.VISIBLE
         }
         selectedColor = when (view.id) {
-            colorViewList[0].id -> colors[0]
-            colorViewList[1].id -> colors[18]
-            colorViewList[2].id -> colors[2]
-            colorViewList[3].id -> colors[3]
-            colorViewList[4].id -> colors[4]
-            colorViewList[5].id -> colors[5]
-            colorViewList[6].id -> colors[6]
-            colorViewList[7].id -> colors[7]
-            colorViewList[8].id -> colors[8]
-            colorViewList[9].id -> colors[9]
-            colorViewList[10].id -> colors[10]
-            colorViewList[11].id -> colors[11]
-            colorViewList[12].id -> colors[12]
-            colorViewList[13].id -> colors[13]
-            colorViewList[14].id -> colors[14]
-            colorViewList[15].id -> colors[15]
-            colorViewList[16].id -> colors[16]
-            colorViewList[17].id -> colors[17]
+            colorViewList[0].id -> colorsString[0]
+            colorViewList[1].id -> colorsString[18]
+            colorViewList[2].id -> colorsString[2]
+            colorViewList[3].id -> colorsString[3]
+            colorViewList[4].id -> colorsString[4]
+            colorViewList[5].id -> colorsString[5]
+            colorViewList[6].id -> colorsString[6]
+            colorViewList[7].id -> colorsString[7]
+            colorViewList[8].id -> colorsString[8]
+            colorViewList[9].id -> colorsString[9]
+            colorViewList[10].id -> colorsString[10]
+            colorViewList[11].id -> colorsString[11]
+            colorViewList[12].id -> colorsString[12]
+            colorViewList[13].id -> colorsString[13]
+            colorViewList[14].id -> colorsString[14]
+            colorViewList[15].id -> colorsString[15]
+            colorViewList[16].id -> colorsString[16]
+            colorViewList[17].id -> colorsString[17]
             else -> throw IllegalArgumentException("Invalid color resource ID")
         }
     }
@@ -194,7 +189,7 @@ class CreateCategoryActivity() : AppCompatActivity() {
     private fun onIconClicked(context: Context, icon: ImageView, iconViewLis: List<ImageView>, backgroundDark: Int) {
         setBackgroundDefault(iconViewLis)
 
-        val selectedColorIcon = ContextCompat.getColor(context, colors[1])
+        val selectedColorIcon = ContextCompat.getColor(context, color[1])
         when (icon.id) {
             iconViewLis[0].id -> { iconViewLis[0].setBackgroundResource(backgroundDark); iconViewLis[0].setColorFilter(selectedColorIcon) }
             iconViewLis[1].id -> { iconViewLis[1].setBackgroundResource(backgroundDark); iconViewLis[1].setColorFilter(selectedColorIcon) }
@@ -241,7 +236,7 @@ class CreateCategoryActivity() : AppCompatActivity() {
     private fun setBackgroundDefault(iconViewLis: List<ImageView>) {
         for (icon in iconViewLis) {
             icon.setBackgroundResource(R.drawable.icon_background_white)
-            icon.setColorFilter(ContextCompat.getColor(icon.context, colors[0]))
+            icon.setColorFilter(ContextCompat.getColor(icon.context, color[0]))
         }
     }
 }

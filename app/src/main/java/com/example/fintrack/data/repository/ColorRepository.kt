@@ -10,6 +10,10 @@ class ColorRepository(private val context: Context) {
         return ContextCompat.getColor(context, colorId)
     }
 
+    fun getColor(colorName: String): Int {
+        return colorMap[colorName] ?: ContextCompat.getColor(context, R.color.black)
+    }
+
     val colors = arrayOf(
         R.color.black,
         R.color.white,
@@ -30,6 +34,28 @@ class ColorRepository(private val context: Context) {
         R.color.medium_green,
         R.color.medium_brown,
         R.color.white_shadow
+    )
+
+    val colorMap = mapOf(
+        "black" to R.color.black,
+        "white" to R.color.white ,
+        "red" to R.color.red,
+        "violet" to R.color.violet,
+        "cor" to R.color.ocean_blue,
+        "ocean_blue" to R.color.blue,
+        "water_blue" to R.color.water_blue,
+        "water_green" to R.color.water_green,
+        "light_green" to R.color.light_green,
+        "light_yellow" to R.color.light_yellow,
+        "medium_yellow" to R.color.medium_yellow,
+        "light_orange" to R.color.light_orange,
+        "medium_orange" to R.color.medium_orange,
+        "light_brown" to R.color.light_brown,
+        "grey" to R.color.grey,
+        "pink" to R.color.pink,
+        "medium_green" to R.color.medium_green,
+        "medium_brown" to R.color.medium_brown,
+        "white_shadow" to R.color.white_shadow
     )
 
 }
