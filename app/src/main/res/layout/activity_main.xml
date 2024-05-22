@@ -92,7 +92,6 @@
                     app:layout_constraintTop_toBottomOf="@id/division"
                     tools:listitem="@layout/category_item" />
 
-
                 <LinearLayout
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
