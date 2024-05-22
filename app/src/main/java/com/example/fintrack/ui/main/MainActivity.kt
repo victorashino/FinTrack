@@ -1,5 +1,6 @@
 package com.example.fintrack.ui.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityMainBinding
@@ -37,16 +39,70 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
         setupRecyclerView()
-
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun onCategorySelected(category: Category) {
         viewModel.selectCategory(category)
-        updateButton(category)
+        updateButton()
+        categoryAdapter.notifyDataSetChanged()
     }
 
-    private fun updateButton(category: Category) {
+    private fun setupRecyclerView() {
+        val rvCategory = binding.rvCategory
+        val rvSpent = binding.rvSpent
+        rvCategory.adapter = categoryAdapter
+        rvSpent.adapter = spentAdapter
+
+        observeCategoryViewModel()
+        observeSpentViewModel()
+    }
+
+    private fun observeSelectedCategory() {
+        viewModel.selectedCategory.observe(this) { category ->
+            category?.let {
+                onCategorySelected(category)
+            }
+        }
+    }
+
+    private fun observeCategoryViewModel() {
+        viewModel.allCategories.observe(this) { categories ->
+            categories?.let {
+                updateCategoryRecyclerView(categories)
+            }
+        }
+    }
+
+    private fun observeSpentViewModel() {
+        viewModel.spents.observe(this) { spents ->
+            spents?.let {
+                updateAllSpentRecyclerView(spents)
+            }
+        }
+    }
+
+    private fun updateCategoryRecyclerView(categories: List<Category>) {
+        categoryAdapter.submitList(categories)
+    }
+
+    private fun updateAllSpentRecyclerView(spents: List<Spent>) {
+        spentAdapter.submitList(spents)
+    }
+
+    private fun updateButton() {
         val category = viewModel.selectedCategory.value
 
         if (category != null) {
@@ -68,39 +124,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.i("category_null", "updateButton: category is null")
         }
-    }
-
-    private fun setupRecyclerView() {
-        binding.rvCategory.apply {
-            adapter = categoryAdapter
-            observeViewModel()
-        }
-        binding.rvSpent.apply {
-            adapter = spentAdapter
-            observeViewModel()
-        }
-    }
-
-    private fun observeViewModel() {
-        viewModel.allCategories.observe(this) { categories ->
-            categories?.let {
-                updateCategoryRecyclerView(categories)
-            }
-        }
-
-        viewModel.allSpents.observe(this) { spents ->
-            spents?.let {
-                updateSpentRecyclerView(spents)
-            }
-        }
-    }
-
-    private fun updateCategoryRecyclerView(categories: List<Category>) {
-        categoryAdapter.submitList(categories)
-    }
-    
-    private fun updateSpentRecyclerView(spents: List<Spent>) {
-        spentAdapter.submitList(spents)
     }
 
 }

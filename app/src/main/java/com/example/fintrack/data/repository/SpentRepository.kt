@@ -6,7 +6,9 @@ import com.example.fintrack.data.model.Spent
 
 class SpentRepository(private val dao: SpentDao) {
 
-    val allSpent: LiveData<List<Spent>> = dao.getAll()
+    fun getSpentsByCategoryId(categoryId: Int): LiveData<List<Spent>> {
+        return dao.getSpentByCategoryId(categoryId)
+    }
 
     suspend fun insert(spent: Spent) {
         dao.insert(spent)
@@ -22,10 +24,6 @@ class SpentRepository(private val dao: SpentDao) {
 
     suspend fun deleteAllByCategory(categoryId: Int, spentCategoryId: Int) {
         dao.deleteAllByCategory(categoryId, spentCategoryId)
-    }
-
-    suspend fun getAllByCategory(categoryId: Int, spentCategoryId: Int): List<Spent?> {
-        return dao.getAllByCategory(categoryId, spentCategoryId)
     }
 
 }

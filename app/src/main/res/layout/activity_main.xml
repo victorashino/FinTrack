@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -68,60 +68,44 @@
                 <View
                     android:id="@+id/division"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="2dp"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="32dp"
-                    android:background="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/categoryLayout"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/backgroung_view"
+                    app:layout_constraintBottom_toTopOf="@+id/rvCategory"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-                <LinearLayout
-                    android:id="@+id/categoryLayout"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCategory"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toTopOf="@id/btnAdd"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/division"
-                    android:orientation="vertical" >
+                    tools:listitem="@layout/category_item" />
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:contentDescription="Category"
-                        android:background="@android:color/transparent"
-                        app:tabMode="scrollable"
-                        android:orientation="horizontal" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="8dp"
-                        android:paddingBottom="16dp"
-                        android:clipToPadding="false"
-                        tools:listitem="@layout/category_item"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:orientation="horizontal" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="78dp"
-                    android:layout_marginBottom="4dp"
                     android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="4dp"
                     android:background="@drawable/header_card_shape"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/categoryLayout">
+                    app:layout_constraintTop_toBottomOf="@id/rvCategory">
 
                     <ImageView
                         android:id="@+id/IconNewSpent"
@@ -160,7 +144,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/categoryLayout"
+            app:layout_constraintTop_toBottomOf="@+id/rvCategory"
             tools:listitem="@layout/spent_item" />
 
     </androidx.core.widget.NestedScrollView>

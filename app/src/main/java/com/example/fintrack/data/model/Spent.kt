@@ -22,5 +22,3 @@ data class Spent (
     val categoryId: Int,
     val category: Category
 ) : Serializable
-
-

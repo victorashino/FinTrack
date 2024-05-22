@@ -44,7 +44,6 @@ class SpentAdapter :
 class SpentViewHolder(private val binding: SpentItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    @SuppressLint("ResourceType")
     fun bind(spent: Spent) {
         val context = binding.root.context
 
@@ -52,7 +51,7 @@ class SpentViewHolder(private val binding: SpentItemBinding) :
         name.text = spent.name
 
         val value = binding.txtSpentValue
-        value.text = "$${spent.value}"
+        value.text = String.format("R$ %.2f", spent.value)
 
         val categoryColor = ContextCompat.getColor(context, ColorRepository(context).getColor(spent.category.color))
 
@@ -63,7 +62,7 @@ class SpentViewHolder(private val binding: SpentItemBinding) :
         val layerDrawable = binding.ctnSpentCard.background as LayerDrawable
 
         val borderDrawable = layerDrawable.findDrawableByLayerId(R.id.border) as GradientDrawable
-        borderDrawable.setStroke(3, categoryColor)
+        borderDrawable.setStroke(5, categoryColor)
         val itemSideDrawable =
             layerDrawable.findDrawableByLayerId(R.id.itemSide) as GradientDrawable
         itemSideDrawable.setColor(categoryColor)

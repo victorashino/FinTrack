@@ -21,6 +21,8 @@ import kotlin.coroutines.coroutineContext
 class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
     ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {
 
+    private var selectedPosition: Int = 0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding =
             CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -29,7 +31,14 @@ class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = getItem(position)
-        holder.bind(category)
+        holder.bind(category, position == selectedPosition)
+
+        holder.itemView.setOnClickListener {
+            notifyItemChanged(selectedPosition)
+            selectedPosition = holder.bindingAdapterPosition
+            notifyItemChanged(selectedPosition)
+            onItemClick(category)
+        }
     }
 
     companion object : DiffUtil.ItemCallback<Category>() {
@@ -53,20 +62,22 @@ class CategoryViewHolder(
     RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("ResourceAsColor", "ResourceType")
-    fun bind(category: Category) {
-
+    fun bind(category: Category, isSelected: Boolean) {
+        val name = binding.categoryName
+        val background = binding.root.background as GradientDrawable
         val context: Context = binding.root.context
         val color = ColorRepository(context).getColor(category.color)
 
-        val name = binding.categoryName
         name.text = category.name
-        name.setTextColor(ContextCompat.getColor(context, color))
+        background.setStroke(5, ContextCompat.getColor(context, color))
 
-        val background = binding.ctnCategoryItem.background as GradientDrawable
-        background.setStroke(
-            3,
-            ContextCompat.getColor(context, ColorRepository(context).getColor(category.color))
-        )
+        if (isSelected) {
+            background.setColor(ContextCompat.getColor(context, color))
+            binding.categoryName.setTextColor(ContextCompat.getColor(context, ColorRepository(context).colors[1]))
+        } else {
+            background.setColor(ContextCompat.getColor(context, ColorRepository(context).colors[1]))
+            name.setTextColor(ContextCompat.getColor(context, color))
+        }
 
         binding.root.setOnClickListener {
             onItemClick(category)
