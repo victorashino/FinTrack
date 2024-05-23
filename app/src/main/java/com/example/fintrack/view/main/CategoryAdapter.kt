@@ -1,22 +1,17 @@
-package com.example.fintrack.ui.main
+package com.example.fintrack.view.main
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fintrack.R
 import com.example.fintrack.databinding.CategoryItemBinding
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.repository.ColorRepository
-import com.example.fintrack.domain.usecase.SelectColorUseCase
-import kotlin.coroutines.coroutineContext
 
 class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
     ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {

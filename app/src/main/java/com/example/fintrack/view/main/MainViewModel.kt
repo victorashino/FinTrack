@@ -1,4 +1,4 @@
-package com.example.fintrack.ui.main
+package com.example.fintrack.view.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.switchMap
 import com.example.fintrack.R
-import com.example.fintrack.data.database.SpentDao
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.CategoryRepository
@@ -19,17 +18,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val categoryRepository: CategoryRepository
     val allCategories: LiveData<List<Category>>
-
-    private val spentRepository: SpentRepository
     val selectedCategory = MutableLiveData<Category>()
 
+    private val spentRepository: SpentRepository
     val spents: LiveData<List<Spent>>
+    val totalSpentValue: LiveData<Float>
 
     private val allCategory = Category(0, "All", "black", R.drawable.ic_add)
 
     init {
         val database = (application as FinTrackApplication).dataBase
-
 
         val categoryDao = database.categoryDao()
         categoryRepository = CategoryRepository(categoryDao)
@@ -43,6 +41,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             spentRepository.getSpentsByCategoryId(category.id)
         }
 
+        totalSpentValue = spentRepository.totalValue
     }
 
     fun selectCategory(category: Category) {

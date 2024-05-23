@@ -1,6 +1,5 @@
-package com.example.fintrack.ui.main
+package com.example.fintrack.view.main
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
@@ -13,8 +12,6 @@ import com.example.fintrack.R
 import com.example.fintrack.databinding.SpentItemBinding
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.ColorRepository
-import com.example.fintrack.data.repository.IconRepository
-import com.example.fintrack.domain.usecase.SelectColorUseCase
 
 class SpentAdapter :
     ListAdapter<Spent, SpentViewHolder>(SpentAdapter) {
@@ -51,7 +48,7 @@ class SpentViewHolder(private val binding: SpentItemBinding) :
         name.text = spent.name
 
         val value = binding.txtSpentValue
-        value.text = String.format("R$ %.2f", spent.value)
+        value.text = String.format("$%.2f", spent.value)
 
         val categoryColor = ContextCompat.getColor(context, ColorRepository(context).getColor(spent.category.color))
 

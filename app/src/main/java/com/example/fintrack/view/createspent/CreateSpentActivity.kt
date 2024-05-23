@@ -1,4 +1,4 @@
-package com.example.fintrack.ui.createspent
+package com.example.fintrack.view.createspent
 
 import android.content.Context
 import android.content.Intent
@@ -13,7 +13,7 @@ import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityCreateSpentBinding
-import com.example.fintrack.ui.main.MainActivity
+import com.example.fintrack.view.main.MainActivity
 
 class CreateSpentActivity : AppCompatActivity() {
 
@@ -83,7 +83,6 @@ class CreateSpentActivity : AppCompatActivity() {
         }
 
         binding.ctnBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

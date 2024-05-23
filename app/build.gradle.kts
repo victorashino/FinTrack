@@ -66,4 +66,7 @@ dependencies {
     // Gson
     implementation("com.google.code.gson:gson:2.11.0")
 
+    // Biometria
+    implementation("androidx.biometric:biometric:1.1.0")
+
 }

@@ -14,6 +14,9 @@ interface SpentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(spent: Spent)
 
+    @Query("SELECT SUM(value) FROM spent")
+    fun getTotalValue(): LiveData<Float>
+
     @Update
     suspend fun update(spent: Spent)
 

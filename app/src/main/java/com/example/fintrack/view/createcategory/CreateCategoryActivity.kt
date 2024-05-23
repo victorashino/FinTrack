@@ -1,4 +1,4 @@
-package com.example.fintrack.ui.createcategory
+package com.example.fintrack.view.createcategory
 
 import android.content.Context
 import android.os.Build

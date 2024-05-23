@@ -1,4 +1,4 @@
-package com.example.fintrack.ui.main
+package com.example.fintrack.view.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,12 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityMainBinding
-import com.example.fintrack.ui.createspent.CreateSpentActivity
-import com.example.fintrack.ui.createcategory.CreateCategoryActivity
+import com.example.fintrack.view.createspent.CreateSpentActivity
+import com.example.fintrack.view.createcategory.CreateCategoryActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,19 +37,19 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        observeTotalValue()
         viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
         setupRecyclerView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
+    private fun observeTotalValue() {
+        viewModel.totalSpentValue.observe(this) { totalValue ->
+            if (totalValue != null) {
+                binding.txtSum.text = String.format("$ %.2f", totalValue)
+            } else {
+                binding.txtSum.text = "$0.00"
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -1,15 +1,12 @@
-package com.example.fintrack.ui.createspent
+package com.example.fintrack.view.createspent
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
-import com.example.fintrack.data.repository.CategoryRepository
 import com.example.fintrack.data.repository.SpentRepository
-import com.example.fintrack.ui.createcategory.CreateCategoryViewModel
 import com.example.fintrack.utils.FinTrackApplication
 import kotlinx.coroutines.launch
 

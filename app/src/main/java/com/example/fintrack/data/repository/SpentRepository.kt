@@ -6,6 +6,8 @@ import com.example.fintrack.data.model.Spent
 
 class SpentRepository(private val dao: SpentDao) {
 
+    val totalValue: LiveData<Float> = dao.getTotalValue()
+
     fun getSpentsByCategoryId(categoryId: Int): LiveData<List<Spent>> {
         return dao.getSpentByCategoryId(categoryId)
     }
