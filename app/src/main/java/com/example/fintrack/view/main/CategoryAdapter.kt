@@ -13,14 +13,16 @@ import com.example.fintrack.databinding.CategoryItemBinding
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.repository.ColorRepository
 
-class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
+class CategoryAdapter(
+    private val onItemClick: (Category) -> Unit,
+    private val longClick: (Category) -> Unit) :
     ListAdapter<Category, CategoryViewHolder>(CategoryAdapter) {
 
     private var selectedPosition: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding = CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoryViewHolder(binding, onItemClick)
+        return CategoryViewHolder(binding, onItemClick, longClick)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
@@ -51,7 +53,8 @@ class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
 
 class CategoryViewHolder(
     private val binding: CategoryItemBinding,
-    private val onItemClick: (Category) -> Unit
+    private val onItemClick: (Category) -> Unit,
+    private val longClick: (Category) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -75,6 +78,11 @@ class CategoryViewHolder(
 
         binding.root.setOnClickListener {
             onItemClick(category)
+        }
+
+        binding.root.setOnLongClickListener {
+            longClick(category)
+            true
         }
     }
 }

@@ -28,8 +28,8 @@ class SpentRepository(private val dao: SpentDao) {
         dao.deleteById(id)
     }
 
-    suspend fun deleteAllByCategory(categoryId: Int, spentCategoryId: Int) {
-        dao.deleteAllByCategory(categoryId, spentCategoryId)
+    suspend fun deleteAllByCategory(categoryId: Int) {
+        dao.deleteAllByCategory(categoryId)
     }
 
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.SpentRepository
-import com.example.fintrack.utils.FinTrackApplication
+import com.example.fintrack.data.database.FinTrackApplication
 import kotlinx.coroutines.launch
 
 class CreateSpentViewModel(private val spentRepository: SpentRepository, application: Application) : AndroidViewModel(application) {

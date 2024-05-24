@@ -7,12 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.CategoryRepository
 import com.example.fintrack.data.repository.SpentRepository
-import com.example.fintrack.utils.FinTrackApplication
+import com.example.fintrack.data.database.FinTrackApplication
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -46,12 +48,31 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         totalValueByCategory = valueByCategory(1)
     }
 
-    private fun valueByCategory(categoryId: Int): LiveData<Float> {
-        return spentRepository.valueByCategory(categoryId)
-    }
-
     fun selectCategory(category: Category) {
         selectedCategory.value = category
+    }
+
+    fun deleteCategoryById(categoryId: Int) {
+        viewModelScope.launch {
+            deleteSpentsByCategoryId(categoryId)
+            categoryRepository.deleteById(categoryId)
+        }
+    }
+
+    fun deleteSpentById(spentId: Int) {
+        viewModelScope.launch {
+            spentRepository.deleteById(spentId)
+        }
+    }
+
+    private fun deleteSpentsByCategoryId(categoryId: Int) {
+        viewModelScope.launch {
+            spentRepository.deleteAllByCategory(categoryId)
+        }
+    }
+
+    private fun valueByCategory(categoryId: Int): LiveData<Float> {
+        return spentRepository.valueByCategory(categoryId)
     }
 
     companion object {

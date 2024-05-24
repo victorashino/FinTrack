@@ -16,6 +16,7 @@ import com.example.fintrack.data.repository.ColorRepository
 
 class SpentAdapter(
     private val onItemClicked: (spent: Spent, category: Category) -> Unit,
+    private val onItemLongClicked: (spent: Spent) -> Unit
 ) :
     ListAdapter<Spent, SpentViewHolder>(SpentAdapter) {
 
@@ -26,7 +27,7 @@ class SpentAdapter(
 
     override fun onBindViewHolder(holder: SpentViewHolder, position: Int) {
         val spent = getItem(position)
-        holder.bind(spent, onItemClicked)
+        holder.bind(spent, onItemClicked, onItemLongClicked)
     }
 
     companion object : DiffUtil.ItemCallback<Spent>() {
@@ -44,7 +45,7 @@ class SpentAdapter(
 class SpentViewHolder(private val binding: SpentItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(spent: Spent, onItemClicked: (Spent, Category) -> Unit) {
+    fun bind(spent: Spent, onItemClicked: (Spent, Category) -> Unit, onItemLongClicked: (Spent) -> Unit) {
         val context = binding.root.context
 
         val name = binding.txtSpentName
@@ -73,6 +74,11 @@ class SpentViewHolder(private val binding: SpentItemBinding) :
 
         binding.root.setOnClickListener {
             onItemClicked.invoke(spent, spent.category)
+        }
+
+        binding.root.setOnLongClickListener {
+            onItemLongClicked(spent)
+            true
         }
     }
 }

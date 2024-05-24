@@ -26,9 +26,12 @@ interface SpentDao {
     @Query("DELETE FROM Spent WHERE id = :id")
     suspend fun deleteById(id: Int)
 
-    @Query("SELECT * FROM Spent WHERE categoryId = :categoryId OR :categoryId = 1")
+    @Query("SELECT * FROM Spent WHERE categoryId = :categoryId OR :categoryId = 1 ORDER BY id DESC")
     fun getSpentByCategoryId(categoryId: Int): LiveData<List<Spent>>
 
-    @Query("DELETE FROM Spent WHERE :selectedCategoryId = :spentCategoryId")
-    suspend fun deleteAllByCategory(selectedCategoryId: Int, spentCategoryId: Int)
+    @Query("DELETE FROM SPENT WHERE categoryId = :selectedCategoryId")
+    suspend fun deleteAllByCategory(selectedCategoryId: Int)
 }
+
+/*
+"SELECT * FROM Spent WHERE categoryId = :categoryId OR :categoryId = 1"*/

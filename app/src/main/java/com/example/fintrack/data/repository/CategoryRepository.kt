@@ -14,4 +14,8 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
             categoryDao.insert(category)
         }
     }
+
+    suspend fun deleteById(categoryId: Int) {
+        categoryDao.deleteById(categoryId)
+    }
 }

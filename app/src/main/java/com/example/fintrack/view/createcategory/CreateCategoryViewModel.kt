@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.repository.CategoryRepository
-import com.example.fintrack.utils.FinTrackApplication
+import com.example.fintrack.data.database.FinTrackApplication
 import kotlinx.coroutines.launch
 
 class CreateCategoryViewModel(private val categoryRepository: CategoryRepository, application: Application) : AndroidViewModel(application) {

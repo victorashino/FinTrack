@@ -1,16 +1,11 @@
-package com.example.fintrack.utils
+package com.example.fintrack.data.database
 
 import android.app.Application
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.fintrack.R
-import com.example.fintrack.data.database.AppDataBase
 import com.example.fintrack.data.model.Category
-import com.example.fintrack.data.repository.ColorRepository
-import com.example.fintrack.data.repository.IconRepository
-import com.example.fintrack.domain.usecase.SelectColorUseCase
-import com.example.fintrack.domain.usecase.SelectIconUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

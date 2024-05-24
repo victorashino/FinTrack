@@ -1,12 +1,18 @@
 package com.example.fintrack.view.main
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityMainBinding
@@ -17,11 +23,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val spentAdapter: SpentAdapter by lazy { SpentAdapter(::openCreateSpentToUpdate) }
-
-    private var categoryAdapter: CategoryAdapter = CategoryAdapter { category ->
-        onCategorySelected(category)
+    private val spentAdapter: SpentAdapter by lazy { SpentAdapter(::openCreateSpentToUpdate) { spent ->
+        dialogDeleteSpent(spent)
     }
+    }
+
+    private var categoryAdapter: CategoryAdapter = CategoryAdapter( { category ->
+        onCategorySelected(category)
+    },
+    { category ->
+        dialogDeleteCategory(category)
+    })
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModel.getVMFactory(application)
@@ -71,6 +83,55 @@ class MainActivity : AppCompatActivity() {
         observeTotalValue(category)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun dialogDeleteCategory(category: Category) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val dialogTitle: TextView = dialog.findViewById(R.id.dialogTitle)
+        dialogTitle.text = "Delete ${category.name}"
+
+        val dialogMessage: TextView = dialog.findViewById(R.id.dialogMessage)
+        dialogMessage.text = "This will exclude all related expenses!"
+
+        val okButton: TextView = dialog.findViewById(R.id.btnOk)
+        okButton.setOnClickListener {
+            viewModel.deleteCategoryById(category.id)
+            dialog.dismiss()
+        }
+
+        val cancelButton: TextView = dialog.findViewById(R.id.btnCancel)
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun dialogDeleteSpent(spent: Spent) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val dialogTitle: TextView = dialog.findViewById(R.id.dialogTitle)
+        dialogTitle.text = "Delete ${spent.name}?"
+
+        val okButton: TextView = dialog.findViewById(R.id.btnOk)
+        okButton.setOnClickListener {
+            viewModel.deleteSpentById(spent.id)
+            dialog.dismiss()
+        }
+
+        val cancelButton: TextView = dialog.findViewById(R.id.btnCancel)
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
     private fun setupRecyclerView() {
         val rvCategory = binding.rvCategory
         val rvSpent = binding.rvSpent
@@ -85,8 +146,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.allCategories.observe(this) { categories ->
             categories?.let {
                 categoryAdapter.submitList(categories)
-                updateButton(categories[0])
-                observeTotalValue(categories[0])
+
+                if (categories.isNotEmpty()) {
+                    updateButton(categories.first())
+                    observeTotalValue(categories.first())
+                }
             }
         }
     }
