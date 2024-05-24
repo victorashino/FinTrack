@@ -17,13 +17,16 @@ interface SpentDao {
     @Query("SELECT SUM(value) FROM spent")
     fun getTotalValue(): LiveData<Float>
 
+    @Query("SELECT SUM(value) FROM Spent WHERE categoryId = :categoryId")
+    fun getValueByCategory(categoryId: Int): LiveData<Float>
+
     @Update
     suspend fun update(spent: Spent)
 
     @Query("DELETE FROM Spent WHERE id = :id")
     suspend fun deleteById(id: Int)
 
-    @Query("SELECT * FROM Spent WHERE categoryId = :categoryId OR :categoryId = 0")
+    @Query("SELECT * FROM Spent WHERE categoryId = :categoryId OR :categoryId = 1")
     fun getSpentByCategoryId(categoryId: Int): LiveData<List<Spent>>
 
     @Query("DELETE FROM Spent WHERE :selectedCategoryId = :spentCategoryId")

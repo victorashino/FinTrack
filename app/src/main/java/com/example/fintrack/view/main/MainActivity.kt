@@ -3,7 +3,6 @@ package com.example.fintrack.view.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,14 +10,14 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityMainBinding
-import com.example.fintrack.view.createspent.CreateSpentActivity
 import com.example.fintrack.view.createcategory.CreateCategoryActivity
+import com.example.fintrack.view.createspent.CreateSpentActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val spentAdapter: SpentAdapter by lazy { SpentAdapter() }
+    private val spentAdapter: SpentAdapter by lazy { SpentAdapter(::openCreateSpentToUpdate) }
 
     private var categoryAdapter: CategoryAdapter = CategoryAdapter { category ->
         onCategorySelected(category)
@@ -37,26 +36,39 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        observeTotalValue()
+        observeTotalValue(viewModel.selectedCategory.value!!)
         viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
         setupRecyclerView()
+        updateButton(viewModel.selectedCategory.value!!)
     }
 
-    private fun observeTotalValue() {
+    @SuppressLint("DefaultLocale", "SetTextI18n")
+    private fun observeTotalValue(category: Category) {
+        /*if (category.id == 1) {*/
         viewModel.totalSpentValue.observe(this) { totalValue ->
             if (totalValue != null) {
-                binding.txtSum.text = String.format("$ %.2f", totalValue)
+                binding.txtSum.text = String.format("$%.2f", totalValue)
             } else {
                 binding.txtSum.text = "$0.00"
             }
         }
+        /*} else {
+            viewModel.totalValueByCategory.observe(this) { valueByCategory ->
+                if (valueByCategory != null) {
+                    binding.txtSum.text = String.format("$%.2f", valueByCategory)
+                } else {
+                    binding.txtSum.text = "$0.00"
+                }
+            }
+        }*/
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun onCategorySelected(category: Category) {
         viewModel.selectCategory(category)
-        updateButton()
         categoryAdapter.notifyDataSetChanged()
+        updateButton(category)
+        observeTotalValue(category)
     }
 
     private fun setupRecyclerView() {
@@ -69,18 +81,12 @@ class MainActivity : AppCompatActivity() {
         observeSpentViewModel()
     }
 
-    private fun observeSelectedCategory() {
-        viewModel.selectedCategory.observe(this) { category ->
-            category?.let {
-                onCategorySelected(category)
-            }
-        }
-    }
-
     private fun observeCategoryViewModel() {
         viewModel.allCategories.observe(this) { categories ->
             categories?.let {
-                updateCategoryRecyclerView(categories)
+                categoryAdapter.submitList(categories)
+                updateButton(categories[0])
+                observeTotalValue(categories[0])
             }
         }
     }
@@ -88,41 +94,32 @@ class MainActivity : AppCompatActivity() {
     private fun observeSpentViewModel() {
         viewModel.spents.observe(this) { spents ->
             spents?.let {
-                updateAllSpentRecyclerView(spents)
+                spentAdapter.submitList(spents)
             }
         }
     }
 
-    private fun updateCategoryRecyclerView(categories: List<Category>) {
-        categoryAdapter.submitList(categories)
-    }
+    @SuppressLint("SetTextI18n")
+    private fun updateButton(category: Category) {
 
-    private fun updateAllSpentRecyclerView(spents: List<Spent>) {
-        spentAdapter.submitList(spents)
-    }
-
-    private fun updateButton() {
-        val category = viewModel.selectedCategory.value
-
-        if (category != null) {
-            if (category.name == "All") {
-                binding.txtNewSpent.text = "New Category"
-                binding.btnAdd.setOnClickListener {
-                    startActivity(Intent(this, CreateCategoryActivity::class.java))
-                }
-            } else {
-                binding.txtNewSpent.text = "New Spent"
-                binding.btnAdd.setOnClickListener {
-                    val id = category.id
-                    val name = category.name
-                    val icon = category.icon
-                    val color: String = category.color
-                    startActivity(CreateSpentActivity.startByMain(this, id, name, color, icon))
-                }
+        if (category.name == "All") {
+            binding.txtNewSpent.text = "New category"
+            binding.btnAdd.setOnClickListener {
+                startActivity(Intent(this, CreateCategoryActivity::class.java))
             }
+            observeTotalValue(category)
         } else {
-            Log.i("category_null", "updateButton: category is null")
+            binding.txtNewSpent.text = "New spent"
+            binding.btnAdd.setOnClickListener {
+                startActivity(CreateSpentActivity.startInsert(this, category))
+            }
+            observeTotalValue(category)
         }
+    }
+
+    private fun openCreateSpentToUpdate(spent: Spent, category: Category) {
+        val intent = CreateSpentActivity.startUpdate(application, spent, category)
+        startActivity(intent)
     }
 
 }

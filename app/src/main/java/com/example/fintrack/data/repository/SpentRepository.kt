@@ -8,6 +8,10 @@ class SpentRepository(private val dao: SpentDao) {
 
     val totalValue: LiveData<Float> = dao.getTotalValue()
 
+    fun valueByCategory(categoryId: Int): LiveData<Float> {
+        return dao.getValueByCategory(categoryId)
+    }
+
     fun getSpentsByCategoryId(categoryId: Int): LiveData<List<Spent>> {
         return dao.getSpentByCategoryId(categoryId)
     }

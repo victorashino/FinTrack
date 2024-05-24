@@ -83,7 +83,6 @@
             android:background="@drawable/rounded"
             android:hint="@string/spent_name"
             android:inputType="text"
-            android:maxLines="1"
             android:textColorHint="#EF14141A"
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>

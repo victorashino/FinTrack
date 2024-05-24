@@ -18,6 +18,12 @@ class CreateSpentViewModel(private val spentRepository: SpentRepository, applica
         }
     }
 
+    fun updateIntoDatabase(spent: Spent) {
+        viewModelScope.launch {
+            spentRepository.update(spent)
+        }
+    }
+
     companion object {
         fun getVMFactory(application: Application): ViewModelProvider.Factory {
             val dataBaseInstance = (application as FinTrackApplication).dataBase

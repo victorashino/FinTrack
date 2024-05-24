@@ -23,8 +23,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val spentRepository: SpentRepository
     val spents: LiveData<List<Spent>>
     val totalSpentValue: LiveData<Float>
+    val totalValueByCategory: LiveData<Float>
 
-    private val allCategory = Category(0, "All", "black", R.drawable.ic_add)
+    private val allCategory = Category(1, "All", "black", R.drawable.ic_add)
 
     init {
         val database = (application as FinTrackApplication).dataBase
@@ -42,6 +43,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         totalSpentValue = spentRepository.totalValue
+        totalValueByCategory = valueByCategory(1)
+    }
+
+    private fun valueByCategory(categoryId: Int): LiveData<Float> {
+        return spentRepository.valueByCategory(categoryId)
     }
 
     fun selectCategory(category: Category) {

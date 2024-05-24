@@ -1,5 +1,6 @@
 package com.example.fintrack.view.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import com.example.fintrack.R
 import com.example.fintrack.utils.BiometricHelper
 import com.example.fintrack.view.main.MainActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class SplashActivity : AppCompatActivity() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     super.onAuthenticationSucceeded(result)
+                    finish()
                 }
             })
 
@@ -42,6 +45,9 @@ class SplashActivity : AppCompatActivity() {
                 .build()
 
             bio.authenticate(info)
+        } else {
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
         }
 
     }

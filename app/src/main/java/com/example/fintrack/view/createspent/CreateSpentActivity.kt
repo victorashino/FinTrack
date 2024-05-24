@@ -13,35 +13,39 @@ import com.example.fintrack.R
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.databinding.ActivityCreateSpentBinding
-import com.example.fintrack.view.main.MainActivity
 
 class CreateSpentActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val EXTRA_CATEGORY_ID = "extra_category_id"
-        private const val EXTRA_CATEGORY_NAME = "extra_category_name"
-        private const val EXTRA_CATEGORY_COLOR = "extra_category_color"
-        private const val EXTRA_CATEGORY_ICON = "extra_category_icon"
+        private const val EXTRA_CATEGORY = "extra_category"
+        private const val EXTRA_SPENT = "extra_spent"
 
-        fun startByMain(context: Context, id: Int, name: String, color: String, icon: Int): Intent {
+        fun startInsert(context: Context, category: Category): Intent {
             return Intent(context, CreateSpentActivity::class.java)
                 .apply {
-                    putExtra(EXTRA_CATEGORY_ID, id)
-                    putExtra(EXTRA_CATEGORY_NAME, name)
-                    putExtra(EXTRA_CATEGORY_COLOR, color)
-                    putExtra(EXTRA_CATEGORY_ICON, icon)
+                    putExtra(EXTRA_CATEGORY, category)
+                }
+        }
+
+        fun startUpdate(context: Context, spent: Spent, category: Category): Intent {
+            return Intent(context, CreateSpentActivity::class.java)
+                .apply {
+                    putExtra(EXTRA_SPENT, spent)
+                    putExtra(EXTRA_CATEGORY, category)
                 }
         }
     }
 
     private lateinit var binding: ActivityCreateSpentBinding
 
-    private lateinit var selectedCategory: Category
-
     private val viewModel: CreateSpentViewModel by viewModels {
         CreateSpentViewModel.getVMFactory(application)
     }
+
+    private lateinit var selectedCategory: Category
+
+    private var spent: Spent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,31 +58,53 @@ class CreateSpentActivity : AppCompatActivity() {
             insets
         }
 
-        val categoryId = intent.getIntExtra(EXTRA_CATEGORY_ID, 0)
-        val categoryName = intent.getStringExtra(EXTRA_CATEGORY_NAME)
-        val categoryColor = intent.getStringExtra(EXTRA_CATEGORY_COLOR)
-        val categoryIcon = intent.getIntExtra(EXTRA_CATEGORY_ICON, 0)
+        val btnSave = binding.btnSave
+        val spentName = binding.edtSpentName
+        val spentPrice = binding.edtSpentPrice
 
-        selectedCategory = Category(categoryId, categoryName!!, categoryColor!!, categoryIcon)
+        selectedCategory = intent.getSerializableExtra(EXTRA_CATEGORY) as Category
 
-        binding.btnSave.setOnClickListener {
-            val name = binding.edtSpentName.text.toString()
-            val priceString = binding.edtSpentPrice.text.toString()
+        spent = intent.getSerializableExtra(EXTRA_SPENT) as Spent?
 
-            if (priceString.isNotEmpty() && name.isNotEmpty() && selectedCategory.id != 0) {
-                val price = priceString.toFloat()
-                val newSpent = Spent(0, name, price, selectedCategory.id, selectedCategory)
+        if (spent != null) {
+            spentName.setText(spent?.name)
+            spentPrice.setText(spent?.value.toString())
+
+            btnSave.setOnClickListener {
                 try {
-                    saveSpent(newSpent)
-                    Toast.makeText(this, "$name spent successfully created", Toast.LENGTH_SHORT)
-                        .show()
+                    val name = spentName.text.toString()
+                    val priceString = spentPrice.text.toString()
+                    saveOrUpdateSpent(
+                        Spent(
+                            spent!!.id,
+                            name,
+                            priceString.toFloat(),
+                            selectedCategory.id,
+                            selectedCategory
+                        )
+                    )
                     finish()
                 } catch (e: Exception) {
-                    Toast.makeText(this, "Error saving spent", Toast.LENGTH_SHORT).show()
-                    finish()
+                    Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+
+            btnSave.setOnClickListener {
+                try {
+                    val name = spentName.text.toString()
+                    val priceString = spentPrice.text.toString().toFloat()
+                    val newSpent = Spent(0, name, priceString, selectedCategory.id, selectedCategory)
+
+                    if (name.isNotEmpty() && priceString > 0) {
+                        saveOrUpdateSpent(newSpent)
+                        Toast.makeText(this, "$name spent successfully created", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+                }
+
             }
         }
 
@@ -87,7 +113,34 @@ class CreateSpentActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveSpent(spent: Spent) {
+    private fun saveOrUpdateSpent(spent: Spent) {
         viewModel.insertIntoDatabase(spent)
     }
+
+    private fun updateSpent(spent: Spent) {
+        viewModel.updateIntoDatabase(spent)
+    }
 }
+
+/*        binding.btnSave.setOnClickListener {
+            val name = binding.edtSpentName.text.toString()
+            val priceString = binding.edtSpentPrice.text.toString()
+
+            if (priceString.isNotEmpty() && name.isNotEmpty() && selectedCategory.id != 0) {
+
+                val price = priceString.toFloat()
+                val newOrUpdatedSpent = Spent(0, name, price, selectedCategory.id, selectedCategory)
+
+                if (spent == null) {
+                    saveSpent(newOrUpdatedSpent)
+                    Toast.makeText(this, "$name spent successfully created", Toast.LENGTH_SHORT)
+                        .show()
+                    finish()
+                } else {
+                    updateSpent(newOrUpdatedSpent)
+                }
+            } else {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            }
+        }*/
+

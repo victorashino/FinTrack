@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fintrack.R
+import com.example.fintrack.data.model.Category
 import com.example.fintrack.databinding.SpentItemBinding
 import com.example.fintrack.data.model.Spent
 import com.example.fintrack.data.repository.ColorRepository
 
-class SpentAdapter :
+class SpentAdapter(
+    private val onItemClicked: (spent: Spent, category: Category) -> Unit,
+) :
     ListAdapter<Spent, SpentViewHolder>(SpentAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpentViewHolder {
@@ -23,7 +26,7 @@ class SpentAdapter :
 
     override fun onBindViewHolder(holder: SpentViewHolder, position: Int) {
         val spent = getItem(position)
-        holder.bind(spent)
+        holder.bind(spent, onItemClicked)
     }
 
     companion object : DiffUtil.ItemCallback<Spent>() {
@@ -41,7 +44,7 @@ class SpentAdapter :
 class SpentViewHolder(private val binding: SpentItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(spent: Spent) {
+    fun bind(spent: Spent, onItemClicked: (Spent, Category) -> Unit) {
         val context = binding.root.context
 
         val name = binding.txtSpentName
@@ -64,10 +67,12 @@ class SpentViewHolder(private val binding: SpentItemBinding) :
             layerDrawable.findDrawableByLayerId(R.id.itemSide) as GradientDrawable
         itemSideDrawable.setColor(categoryColor)
 
-
         binding.root.setOnLongClickListener {
-
             true // Retorna verdadeiro para indicar que o clique longo foi tratado
+        }
+
+        binding.root.setOnClickListener {
+            onItemClicked.invoke(spent, spent.category)
         }
     }
 }

@@ -19,8 +19,7 @@ class CategoryAdapter(private val onItemClick: (Category) -> Unit) :
     private var selectedPosition: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val binding =
-            CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding, onItemClick)
     }
 
