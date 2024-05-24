@@ -81,8 +81,12 @@ class CategoryViewHolder(
         }
 
         binding.root.setOnLongClickListener {
-            longClick(category)
-            true
+            if (category.name == "All") {
+                return@setOnLongClickListener false
+            } else {
+                longClick(category)
+                true
+            }
         }
     }
 }

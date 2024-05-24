@@ -17,12 +17,13 @@
         android:text="Delete category"
         android:textColor="@color/white"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dialogMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:textColor="@color/white"
@@ -42,6 +43,7 @@
         android:layout_marginEnd="16dp"
         android:textColor="@color/ocean_blue"
         android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -49,13 +51,14 @@
         android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:padding="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:text="Cancel"
         android:textColor="@color/ocean_blue"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnOk" />
+        app:layout_constraintEnd_toStartOf="@+id/btnOk"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

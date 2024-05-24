@@ -23,17 +23,18 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val spentAdapter: SpentAdapter by lazy { SpentAdapter(::openCreateSpentToUpdate) { spent ->
-        dialogDeleteSpent(spent)
-    }
+    private val spentAdapter: SpentAdapter by lazy {
+        SpentAdapter(::openCreateSpentToUpdate) { spent ->
+            dialogDeleteSpent(spent)
+        }
     }
 
-    private var categoryAdapter: CategoryAdapter = CategoryAdapter( { category ->
+    private var categoryAdapter: CategoryAdapter = CategoryAdapter({ category ->
         onCategorySelected(category)
     },
-    { category ->
-        dialogDeleteCategory(category)
-    })
+        { category ->
+            dialogDeleteCategory(category)
+        })
 
     private val viewModel: MainViewModel by viewModels {
         MainViewModel.getVMFactory(application)
@@ -96,12 +97,13 @@ class MainActivity : AppCompatActivity() {
         dialogMessage.text = "This will exclude all related expenses!"
 
         val okButton: TextView = dialog.findViewById(R.id.btnOk)
+        val cancelButton: TextView = dialog.findViewById(R.id.btnCancel)
+
         okButton.setOnClickListener {
             viewModel.deleteCategoryById(category.id)
             dialog.dismiss()
         }
 
-        val cancelButton: TextView = dialog.findViewById(R.id.btnCancel)
         cancelButton.setOnClickListener {
             dialog.dismiss()
         }
