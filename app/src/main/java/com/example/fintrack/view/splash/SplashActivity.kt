@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.fintrack.R
+import com.example.fintrack.data.database.AppDataBase
+import com.example.fintrack.data.database.FinTrackApplication
 import com.example.fintrack.view.main.MainActivity
 import java.util.concurrent.Executor
 
@@ -22,6 +24,7 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var executor: Executor
 
+    private lateinit var db: FinTrackApplication
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,6 +34,8 @@ class SplashActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        db = FinTrackApplication.getInstance()
 
         executor = ContextCompat.getMainExecutor(this)
 
@@ -58,9 +63,10 @@ class SplashActivity : AppCompatActivity() {
         val biometricManager = BiometricManager.from(this)
         when (biometricManager.canAuthenticate()) {
             BiometricManager.BIOMETRIC_SUCCESS -> {
-                biometricPrompt.authenticate(promptInfo)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    biometricPrompt.authenticate(promptInfo)
+                }, 500)
             }
-
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE,
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE,
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {

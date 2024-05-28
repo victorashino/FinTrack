@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -54,13 +53,31 @@ class MainActivity : AppCompatActivity() {
         updateButton(viewModel.selectedCategory.value!!)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun totalVisibility() {
+        val btnVisibility = binding.btnVisibility
+        val txtSum = binding.txtSum
+        var isSumVisible = false
+        txtSum.text = "$••••••"
+        btnVisibility.setOnClickListener {
+            isSumVisible = !isSumVisible
+            if (isSumVisible) {
+                btnVisibility.setImageResource(R.drawable.ic_visibility_on)
+                observeTotalValue()
+            } else {
+                txtSum.text = "$••••••"
+                btnVisibility.setImageResource(R.drawable.ic_visibility_off)
+            }
+        }
+    }
+
     @SuppressLint("DefaultLocale", "SetTextI18n")
     private fun observeTotalValue() {
         viewModel.totalValueByCategory.observe(this) { valueByCategory ->
             if (valueByCategory != null) {
                 binding.txtSum.text = String.format("$%.2f", valueByCategory)
             } else {
-                binding.txtSum.text = "$0.40"
+                binding.txtSum.text = "$0.00"
             }
         }
     }
@@ -139,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (categories.isNotEmpty()) {
                     updateButton(categories.first())
-                    observeTotalValue()
+                    totalVisibility()
                 }
             }
         }
@@ -161,13 +178,13 @@ class MainActivity : AppCompatActivity() {
             binding.btnAdd.setOnClickListener {
                 startActivity(Intent(this, CreateCategoryActivity::class.java))
             }
-            observeTotalValue()
+            totalVisibility()
         } else {
             binding.txtNewSpent.text = "New spent"
             binding.btnAdd.setOnClickListener {
                 startActivity(CreateSpentActivity.startInsert(this, category))
             }
-            observeTotalValue()
+            totalVisibility()
         }
     }
 
