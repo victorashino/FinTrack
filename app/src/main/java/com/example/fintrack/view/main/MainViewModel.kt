@@ -24,7 +24,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val spentRepository: SpentRepository
     val spents: LiveData<List<Spent>>
-    val totalSpentValue: LiveData<Float>
+/*    val totalSpentValue: LiveData<Float>*/
     val totalValueByCategory: LiveData<Float>
 
     private val allCategory = Category(1, "All", "black", R.drawable.ic_add)
@@ -44,8 +44,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             spentRepository.getSpentsByCategoryId(category.id)
         }
 
-        totalSpentValue = spentRepository.totalValue
-        totalValueByCategory = valueByCategory(1)
+/*        totalSpentValue = spentRepository.totalValue*/
+
+        totalValueByCategory = selectedCategory.switchMap { category ->
+            valueByCategory(category.id)
+        }
     }
 
     fun selectCategory(category: Category) {
@@ -72,7 +75,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun valueByCategory(categoryId: Int): LiveData<Float> {
-        return spentRepository.valueByCategory(categoryId)
+        return if (categoryId == 1) {
+            spentRepository.totalValue
+        } else {
+            spentRepository.valueByCategory(categoryId)
+        }
     }
 
     companion object {
