@@ -49,31 +49,20 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        observeTotalValue(viewModel.selectedCategory.value!!)
         viewModel.selectedCategory.value?.let { viewModel.selectCategory(it) }
         setupRecyclerView()
         updateButton(viewModel.selectedCategory.value!!)
     }
 
     @SuppressLint("DefaultLocale", "SetTextI18n")
-    private fun observeTotalValue(category: Category) {
-        /*if (category.id == 1) {*/
-        viewModel.totalSpentValue.observe(this) { totalValue ->
-            if (totalValue != null) {
-                binding.txtSum.text = String.format("$%.2f", totalValue)
+    private fun observeTotalValue() {
+        viewModel.totalValueByCategory.observe(this) { valueByCategory ->
+            if (valueByCategory != null) {
+                binding.txtSum.text = String.format("$%.2f", valueByCategory)
             } else {
-                binding.txtSum.text = "$0.00"
+                binding.txtSum.text = "$0.40"
             }
         }
-        /*} else {
-            viewModel.totalValueByCategory.observe(this) { valueByCategory ->
-                if (valueByCategory != null) {
-                    binding.txtSum.text = String.format("$%.2f", valueByCategory)
-                } else {
-                    binding.txtSum.text = "$0.00"
-                }
-            }
-        }*/
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -81,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.selectCategory(category)
         categoryAdapter.notifyDataSetChanged()
         updateButton(category)
-        observeTotalValue(category)
     }
 
     @SuppressLint("SetTextI18n")
@@ -151,7 +139,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (categories.isNotEmpty()) {
                     updateButton(categories.first())
-                    observeTotalValue(categories.first())
+                    observeTotalValue()
                 }
             }
         }
@@ -173,13 +161,13 @@ class MainActivity : AppCompatActivity() {
             binding.btnAdd.setOnClickListener {
                 startActivity(Intent(this, CreateCategoryActivity::class.java))
             }
-            observeTotalValue(category)
+            observeTotalValue()
         } else {
             binding.txtNewSpent.text = "New spent"
             binding.btnAdd.setOnClickListener {
                 startActivity(CreateSpentActivity.startInsert(this, category))
             }
-            observeTotalValue(category)
+            observeTotalValue()
         }
     }
 
