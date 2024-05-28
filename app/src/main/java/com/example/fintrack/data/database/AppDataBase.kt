@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.fintrack.data.model.Category
 import com.example.fintrack.data.model.Spent
 
-@Database(entities = [Category::class, Spent::class], version = 1)
+@Database(entities = [Category::class, Spent::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
 

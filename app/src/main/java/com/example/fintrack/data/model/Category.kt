@@ -10,6 +10,5 @@ data class Category (
     val id: Int,
     val name: String,
     val color: String,
-    val icon: Int,
-    var isSelected: Boolean = false
+    val icon: Int
 ) : Serializable
