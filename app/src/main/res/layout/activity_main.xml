@@ -96,6 +96,7 @@
                     android:orientation="horizontal"
                     android:paddingHorizontal="8dp"
                     android:paddingBottom="8dp"
+                    android:paddingTop="16dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toTopOf="@id/btnAdd"
                     app:layout_constraintEnd_toEndOf="parent"
