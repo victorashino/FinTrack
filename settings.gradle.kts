@@ -23,3 +23,4 @@ rootProject.name = "FinTrack"
 include(":app")
 include(":auth")
 include(":design-system")
+include(":main")
